@@ -1,6 +1,7 @@
-# trello-trailblazers
+# Trello-trailblazers
 
 ## Names of the team members
 
-### Fatoye Oluwaseun Joseph
-### Chibuzo Franklin Odigbo
+- Fatoye Oluwaseun Joseph
+- Chibuzo Franklin Odigbo
+- Fasakin Henry Olusola
