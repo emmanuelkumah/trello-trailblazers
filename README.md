@@ -3,3 +3,4 @@
 ## Names of the team members
 
 ### Fatoye Oluwaseun Joseph
+### Chibuzo Franklin Odigbo
