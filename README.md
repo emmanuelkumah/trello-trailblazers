@@ -5,3 +5,4 @@
 - Fatoye Oluwaseun Joseph
 - Chibuzo Franklin Odigbo
 - Fasakin Henry Olusola
+- Emmanuel F. Kumah
