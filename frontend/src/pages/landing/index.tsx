@@ -8,7 +8,7 @@ import KeyFeatures from './sections/KeyFeatures';
 import SeamlessExperience from './sections/SeamlessExperience';
 import Testimonials from './sections/Testimonials';
 import CallToAction from './sections/CallToAction';
-import Footer from './sections/Footer'; 
+import Footer from './sections/Footer';
 
 const LandingPage = () => {
   return (
