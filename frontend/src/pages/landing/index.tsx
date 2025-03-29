@@ -1,18 +1,29 @@
+import React from 'react';
 import LayoutWrapper from '@/layout/wrapper/LayoutWrapper';
-import Header from './sections/Header';
-import HeroSection from './sections/HeroSection';
-import FeaturesSection from './sections/FeaturesSection';
-import TestimonialsSection from './sections/TestimonialsSection';
-import CTASection from './sections/CTASection';
+import Navbar from './components/Navbar';
+import HeroSection from './components/HeroSection';
+import AccountFeature from './components/AccountFeature';
+import GroupsFeature from './components/GroupsFeature';
+import ManagementFeature from './components/ManagementFeature';
+import KeyFeatures from './components/KeyFeatures';
+import SeamlessExperience from './components/SeamlessExperience';
+import Testimonials from './components/Testimonials';
+import CallToAction from './components/CallToAction';
+import Footer from './components/Footer';
 
 const LandingPage = () => {
   return (
     <LayoutWrapper>
-      <Header />
+      <Navbar />
       <HeroSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <CTASection />
+      <AccountFeature />
+      <GroupsFeature />
+      <ManagementFeature />
+      <KeyFeatures />
+      <SeamlessExperience />
+      <Testimonials />
+      <CallToAction />
+      <Footer />
     </LayoutWrapper>
   );
 };
