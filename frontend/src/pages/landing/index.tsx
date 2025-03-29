@@ -1,15 +1,14 @@
-import React from 'react';
 import LayoutWrapper from '@/layout/wrapper/LayoutWrapper';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import AccountFeature from './components/AccountFeature';
-import GroupsFeature from './components/GroupsFeature';
-import ManagementFeature from './components/ManagementFeature';
-import KeyFeatures from './components/KeyFeatures';
-import SeamlessExperience from './components/SeamlessExperience';
-import Testimonials from './components/Testimonials';
-import CallToAction from './components/CallToAction';
-import Footer from './components/Footer';
+import Navbar from './sections/Navbar';
+import HeroSection from './sections/HeroSection';
+import AccountFeature from './sections/AccountFeature';
+import GroupsFeature from './sections/GroupsFeature';
+import ManagementFeature from './sections/ManagementFeature';
+import KeyFeatures from './sections/KeyFeatures';
+import SeamlessExperience from './sections/SeamlessExperience';
+import Testimonials from './sections/Testimonials';
+import CallToAction from './sections/CallToAction';
+import Footer from './sections/Footer'; 
 
 const LandingPage = () => {
   return (
