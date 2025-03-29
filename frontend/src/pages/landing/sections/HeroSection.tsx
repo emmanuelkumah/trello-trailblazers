@@ -1,22 +1,34 @@
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
   return (
-    <section className="relative bg-pink-100 py-20 px-6 lg:px-16 text-center">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold text-gray-900">
-          Effortless Expense Sharing for Every Occasion
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">
-          Every splitting scenario, from travel to daily expenses, made easy.
-        </p>
-        <div className="mt-6 flex justify-center gap-4">
-          <Button className="bg-[#FF8E8E] text-white px-6 py-3 rounded-lg">
-            Get Started
-          </Button>
-          <Button variant="outline" className="border-gray-500 text-gray-700 px-6 py-3 rounded-lg">
-            Learn More
-          </Button>
+    <section className='py-16 bg-[#FFE8E8]'>
+      <div className='container mx-auto px-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
+          <div>
+            <h1 className='text-4xl md:text-5xl font-bold mb-4'>
+              Effortless Expense Sharing for Every Occasion
+            </h1>
+            <p className='text-lg mb-6'>
+              Divide bills and expenses simply, keep track of IOUs, and settle
+              costs between friends, family, and roommates. Simplify expense
+              splitting for trips, dinners, and any shared expenses.
+            </p>
+            <Button className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full'>
+              Get Started
+            </Button>
+            <Button variant='link' className='ml-4 text-gray-700'>
+              Learn More →
+            </Button>
+          </div>
+          <div>
+            <img
+              src='/src/assets/hero-image.jpg'
+              alt='Two people looking at a tablet'
+              className='rounded-lg shadow-md w-full'
+            />
+          </div>
         </div>
       </div>
     </section>
