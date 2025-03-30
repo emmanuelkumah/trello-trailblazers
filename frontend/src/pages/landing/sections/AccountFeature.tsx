@@ -21,7 +21,7 @@ const AccountFeature = () => {
           </div>
           <div>
             <img
-              src='/src/assets/secure-account.jpg'
+              src='/src/assets/img/secure-account.jpeg'
               alt='Person using the app on a phone'
               className='rounded-lg w-full h-auto'
             />
