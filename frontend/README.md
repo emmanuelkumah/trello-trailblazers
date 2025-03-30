@@ -22,7 +22,7 @@ We welcome contributions to this project! Please follow these guidelines when co
 
 1. **Branching**: Always create a new branch for your feature or bug fix. The branch name should be descriptive of the changes you are making.
 
-2. **Pull Requests**: Submit your pull requests against the `dev` branch. This allows for easier integration and testing of new features before they are merged into the main branch.
+2. **Pull Requests**: Submit your pull requests against the `dev` branch. This allows for easier integration and testing of new features before they are merged into the main branch. All PRs should be made to the `dev` branch
 
 3. **Code Quality**: Ensure that your code adheres to the existing style and conventions used in the project. Run ESLint and fix any issues before submitting your pull request.
 

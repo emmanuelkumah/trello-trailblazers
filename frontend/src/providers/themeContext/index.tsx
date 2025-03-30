@@ -11,7 +11,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const getPreferredTheme = () => {
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return localStorage.getItem('theme') || (prefersDarkScheme ? 'dark' : 'light');
+    return localStorage.getItem('divvy-theme-manager') || (prefersDarkScheme ? 'dark' : 'light');
   };
 
   const [theme, setTheme] = useState<string>(getPreferredTheme);
