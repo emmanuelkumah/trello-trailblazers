@@ -1,13 +1,16 @@
 import { Suspense } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Dashboard from "@/pages/user/dashboard/page";
+import UserLayout from "@/layout/userLayout";
 
 const UserRoutes = [
   {
     path: "/user",
     element: (
       <Suspense>
-        <Outlet />
+        <UserLayout>
+          <Outlet />
+        </UserLayout>
       </Suspense>
     ),
     children: [

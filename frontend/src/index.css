@@ -152,6 +152,13 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
+@theme {
+  --color-floral: #FFF8F0;
+  --color-light-red: #FF6B6B;
+  --color-mustard: #FFD93D;
+  --color-emerald: #62D2A2;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
