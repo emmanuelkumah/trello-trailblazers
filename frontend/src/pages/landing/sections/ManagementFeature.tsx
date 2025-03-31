@@ -20,7 +20,7 @@ const ManagementFeature = () => {
           </div>
           <div>
             <img
-              src='/src/assets/expense-management.jpg'
+              src='/src/assets/img/expense-management.jpeg'
               alt='People managing expenses'
               className='rounded-lg w-full h-auto'
             />
