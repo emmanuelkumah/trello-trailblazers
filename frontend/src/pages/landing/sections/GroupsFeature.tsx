@@ -7,7 +7,7 @@ const GroupsFeature = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div className='order-2 md:order-1'>
             <img
-              src='/src/assets/create-groups.jpg'
+              src='/src/assets/img/create-group.jpeg'
               alt='People discussing expenses'
               className='rounded-lg w-full h-auto'
             />
