@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @layer theme, base, components, utilities;
 
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -52,35 +52,35 @@
 }
 
 @font-face {
-  font-family: "Manrope";
-  src: url("./fonts/Manrope-Regular.ttf") format("truetype");
+  font-family: 'Teachers';
+  src: url('./fonts/Teachers-Regular.ttf') format('truetype');
   font-weight: 300 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Manrope";
-  src: url("./fonts/Manrope-Medium.ttf") format("truetype");
+  font-family: 'Teachers';
+  src: url('./fonts/Teachers-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Manrope";
-  src: url("./fonts/Manrope-SemiBold.ttf") format("truetype");
+  font-family: 'Teachers';
+  src: url('./fonts/Teachers-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Manrope";
-  src: url("./fonts/Manrope-Bold.ttf") format("truetype");
+  font-family: 'Teachers';
+  src: url('./fonts/Teachers-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
 
 :root {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Teachers', sans-serif;
 }
 
 :root {
