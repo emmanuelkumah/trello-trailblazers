@@ -1,21 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-<<<<<<< HEAD:frontend/src/router/Routes.tsx
-import LandingPage from "../pages/landing/page"
-import AuthRoutes from "./AuthRoutes"
-import UserRoutes from "./UserRoutes"
-=======
-import LandingPage from "../pages/landing"
->>>>>>> landing:frontend/src/router/Route.tsx
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AuthRoutes from './AuthRoutes';
+import UserRoutes from './UserRoutes';
+import LandingPage from '../pages/landing';
 
 const routes = createBrowserRouter([
   {
-    path: "",
-    element: <LandingPage />
+    path: '',
+    element: <LandingPage />,
   },
   ...AuthRoutes,
   ...UserRoutes,
 ]);
 
 export default function RouterContainer() {
-  return <RouterProvider router={routes} />
+  return <RouterProvider router={routes} />;
 }
