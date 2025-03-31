@@ -31,7 +31,7 @@ const HeroSection = () => {
         </div>
         <div className='mt-8'>
           <img
-            src='/src/assets/img/hero-image.jpeg'
+            src='/srcassets/img/hero-image.jpeg'
             alt='Two people looking at a tablet'
             className='rounded-lg shadow-md w-full h-auto'
           />
