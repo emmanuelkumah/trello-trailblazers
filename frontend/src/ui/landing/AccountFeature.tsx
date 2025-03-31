@@ -1,3 +1,5 @@
+import secureAccountImage from '@/assets/img/secure-account.jpeg';
+
 const AccountFeature = () => {
   return (
     <section className='py-16 bg-[#FFE8E8]'>
@@ -16,7 +18,7 @@ const AccountFeature = () => {
           </div>
           <div>
             <img
-              src='/src/assets/img/secure-account.jpeg'
+              src={secureAccountImage}
               alt='Person using the app on a phone'
               className='rounded-lg w-full h-auto'
             />
