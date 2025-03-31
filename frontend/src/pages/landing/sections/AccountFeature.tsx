@@ -1,11 +1,9 @@
-import { Button } from '@/components/ui/button';
-
 const AccountFeature = () => {
   return (
-    <section className='py-16 bg-white'>
+    <section className='py-16 bg-[#FFE8E8]'>
       <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
-          <div>
+        <div className='grid grid-cols-1 gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-start'>
             <h2 className='text-2xl font-bold mb-3'>
               Secure Your Account with Easy Signup and Hassle-Free Login
             </h2>
@@ -15,9 +13,6 @@ const AccountFeature = () => {
               and protection measures, ensuring a safe and seamless financial
               experience.
             </p>
-            <Button variant='link' className='p-0 text-[#FF8E8E]'>
-              Learn More →
-            </Button>
           </div>
           <div>
             <img
