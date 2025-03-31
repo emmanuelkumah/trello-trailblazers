@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import heroImage from '@/assets/img/hero-image.jpeg';
 
 const HeroSection = () => {
   return (
@@ -31,7 +32,7 @@ const HeroSection = () => {
         </div>
         <div className='mt-8'>
           <img
-            src='/src/assets/img/hero-image.jpeg'
+            src={heroImage}
             alt='Two people looking at a tablet'
             className='rounded-lg shadow-md w-full h-auto'
           />
