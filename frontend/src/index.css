@@ -53,28 +53,28 @@
 
 @font-face {
   font-family: 'Teachers';
-  src: url('./fonts/Teachers-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/Teachers-Regular.ttf') format('truetype');
   font-weight: 300 400;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Teachers';
-  src: url('./fonts/Teachers-Medium.ttf') format('truetype');
+  src: url('./assets/fonts/Teachers-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Teachers';
-  src: url('./fonts/Teachers-SemiBold.ttf') format('truetype');
+  src: url('./assets/fonts/Teachers-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Teachers';
-  src: url('./fonts/Teachers-Bold.ttf') format('truetype');
+  src: url('./assets/fonts/Teachers-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
