@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import expenseManagementImage from '@/assets/img/expense-management.jpeg';
 
 const ManagementFeature = () => {
   return (
@@ -20,7 +21,7 @@ const ManagementFeature = () => {
           </div>
           <div>
             <img
-              src='/src/assets/img/expense-management.jpeg'
+              src={expenseManagementImage}
               alt='People managing expenses'
               className='rounded-lg w-full h-auto'
             />
