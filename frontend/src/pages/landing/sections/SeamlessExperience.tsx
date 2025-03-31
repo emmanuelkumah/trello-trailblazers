@@ -10,7 +10,7 @@ const SeamlessExperience = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div>
             <img
-              src='/src/assets/team-expense.jpg'
+              src='/src/assets/img/team-expense-management.jpeg'
               alt='Team expense management'
               className='rounded-lg w-full h-auto'
             />
