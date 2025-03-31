@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import createGroupImage from '@/assets/img/create-group.jpeg';
 
 const GroupsFeature = () => {
   return (
@@ -7,7 +8,7 @@ const GroupsFeature = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div className='order-2 md:order-1'>
             <img
-              src='/src/assets/img/create-group.jpeg'
+              src={createGroupImage}
               alt='People discussing expenses'
               className='rounded-lg w-full h-auto'
             />
