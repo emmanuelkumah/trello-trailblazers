@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import teamExpenseImage from '@/assets/img/team-expense-management.jpeg';
 
 const SeamlessExperience = () => {
   return (
@@ -10,7 +11,7 @@ const SeamlessExperience = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div>
             <img
-              src='/src/assets/img/team-expense-management.jpeg'
+              src={teamExpenseImage}
               alt='Team expense management'
               className='rounded-lg w-full h-auto'
             />
