@@ -1,11 +1,11 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AuthRoutes from './AuthRoutes';
-import UserRoutes from './UserRoutes';
-import LandingPage from '../pages/landing';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "../pages/landing/page";
+import AuthRoutes from "./AuthRoutes";
+import UserRoutes from "./UserRoutes";
 
 const routes = createBrowserRouter([
   {
-    path: '',
+    path: "",
     element: <LandingPage />,
   },
   ...AuthRoutes,
