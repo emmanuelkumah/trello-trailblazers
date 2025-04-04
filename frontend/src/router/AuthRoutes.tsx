@@ -1,5 +1,5 @@
-import Login from "@/pages/auth/login/page";
-import Register from "@/pages/auth/register/page";
+import AuthPage from "@/pages/auth/AuthPage";
+import ForgotPasswordPage from "@/pages/auth/ForgotPasswordPage";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -14,13 +14,17 @@ const AuthRoutes = [
     children: [
       {
         index: true,
-        element: <Login />
+        element: <AuthPage />,
       },
       {
         path: "register",
-        element: <Register />
+        element: <AuthPage />,
       },
-    ]
+      {
+        path: "/auth/password-recovery",
+        element: <ForgotPasswordPage />,
+      },
+    ],
   },
 ];
 
