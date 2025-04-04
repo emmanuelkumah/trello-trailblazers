@@ -17,7 +17,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<string>(getPreferredTheme);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('divvy-theme-manager', theme);
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
