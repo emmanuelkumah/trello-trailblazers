@@ -13,17 +13,20 @@ const HeroSection = () => {
           </div>
           <div>
             <p className='text-lg mb-6 font-sarabun'>
-              Divide bills and expenses simply, keep track of IOUs, and settle
-              costs between friends, family, and roommates. Simplify expense
-              splitting for trips, dinners, and any shared expenses.
+              Divvy simplifies group expenses, making it easy to track, split,
+              and settle costs with friends or colleagues. Experience
+              transparency and fairness in every transaction, ensuring everyone
+              is on the same page.
             </p>
             <div className='flex items-center'>
-              <Button className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full px-6 font-sarabun'>
+              <Button
+                className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full px-6 font-sarabun cursor-pointer transition-colors duration-200'
+              >
                 Get Started
               </Button>
               <Button
                 variant='outline'
-                className='ml-4 text-gray-700 rounded-full border-2 border-gray-300 px-6 bg-transparent hover:bg-transparent font-sarabun'
+                className='ml-4 text-gray-700 rounded-full border-2 border-gray-300 px-6 bg-transparent hover:bg-gray-100 cursor-pointer transition-colors duration-200 font-sarabun'
               >
                 Learn More
               </Button>

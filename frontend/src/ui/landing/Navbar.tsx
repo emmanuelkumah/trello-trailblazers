@@ -12,22 +12,37 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className='hidden md:flex items-center space-x-8'>
-            <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+            <a
+              href='#'
+              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+            >
               How It Works
             </a>
-            <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+            <a
+              href='#'
+              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+            >
               Features
             </a>
-            <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+            <a
+              href='#'
+              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+            >
               Contact
             </a>
-            <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+            <a
+              href='#'
+              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+            >
               Testimonials
             </a>
           </nav>
 
-          <div className='hidden md:block'>
-            <Button className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full px-6'>
+          <div className='hidden md:flex items-center space-x-4'>
+            <Button className='border-2 border-gray-300 text-black bg-transparent rounded-full px-6 transition duration-300 hover:bg-gray-200 cursor-pointer'>
+              Join
+            </Button>
+            <Button className='bg-[#FF8E8E] text-white rounded-full px-6 transition duration-300 hover:bg-[#FF7070] hover:shadow-lg cursor-pointer'>
               Sign Up
             </Button>
           </div>
@@ -76,19 +91,34 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className='md:hidden mt-4 pb-4'>
             <nav className='flex flex-col space-y-4'>
-              <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+              <a
+                href='#'
+                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              >
                 How It Works
               </a>
-              <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+              <a
+                href='#'
+                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              >
                 Features
               </a>
-              <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+              <a
+                href='#'
+                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              >
                 Contact
               </a>
-              <a href='#' className='text-gray-700 hover:text-[#FF8E8E]'>
+              <a
+                href='#'
+                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              >
                 Testimonials
               </a>
-              <Button className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full w-full'>
+              <Button className='border border-gray-300 text-black bg-transparent rounded-full w-full transition duration-300 hover:bg-gray-200 cursor-pointer'>
+                Join
+              </Button>
+              <Button className='bg-[#FF8E8E] text-white rounded-full w-full transition duration-300 hover:bg-[#FF7070] hover:shadow-lg cursor-pointer'>
                 Sign Up
               </Button>
             </nav>
