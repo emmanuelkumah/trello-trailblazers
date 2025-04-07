@@ -3,7 +3,7 @@ import heroImage from '@/assets/img/hero-image.jpeg';
 
 const HeroSection = () => {
   return (
-    <section className='py-16 bg-[#FFE8E8] text-black'>
+    <section className='py-14 bg-[#FFE8E8] text-black'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div>
@@ -12,7 +12,7 @@ const HeroSection = () => {
             </h1>
           </div>
           <div>
-            <p className='text-lg mb-6 font-sarabun'>
+            <p className='text-base mb-6 font-sarabun'>
               Divvy simplifies group expenses, making it easy to track, split,
               and settle costs with friends or colleagues. Experience
               transparency and fairness in every transaction, ensuring everyone

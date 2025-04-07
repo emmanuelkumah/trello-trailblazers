@@ -7,38 +7,38 @@ const Navbar = () => {
   return (
     <header className='bg-[#FFE8E8] py-4'>
       <div className='container mx-auto px-4'>
-        <div className='flex justify-between items-center'>
-          <div className='text-2xl font-bold'>Divvy</div>
+        <div className='flex justify-start items-center space-x-8'>
+          <div className='text-2xl font-medium'>Divvy</div>
 
           {/* Desktop Navigation */}
           <nav className='hidden md:flex items-center space-x-8'>
             <a
               href='#'
-              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
             >
-              How It Works
+              Home Page
             </a>
             <a
               href='#'
-              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
             >
-              Features
+              About us
             </a>
             <a
               href='#'
-              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
             >
-              Contact
+              Contact Us
             </a>
             <a
               href='#'
-              className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+              className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
             >
-              Testimonials
+              More Links
             </a>
           </nav>
 
-          <div className='hidden md:flex items-center space-x-4'>
+          <div className='hidden md:flex items-center space-x-4 ml-auto'>
             <Button className='border-2 border-gray-300 text-black bg-transparent rounded-full px-6 transition duration-300 hover:bg-gray-200 cursor-pointer'>
               Join
             </Button>
@@ -93,27 +93,27 @@ const Navbar = () => {
             <nav className='flex flex-col space-y-4'>
               <a
                 href='#'
-                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+                className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
               >
-                How It Works
+                Home Page
               </a>
               <a
                 href='#'
-                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+                className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
               >
-                Features
+                About us
               </a>
               <a
                 href='#'
-                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+                className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
               >
-                Contact
+                Contact Us
               </a>
               <a
                 href='#'
-                className='text-gray-700 hover:text-black transition duration-300 cursor-pointer'
+                className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
               >
-                Testimonials
+                More Links
               </a>
               <Button className='border border-gray-300 text-black bg-transparent rounded-full w-full transition duration-300 hover:bg-gray-200 cursor-pointer'>
                 Join
