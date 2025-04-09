@@ -156,7 +156,10 @@
   --color-floral: #FFF8F0;
   --color-light-red: #FF6B6B;
   --color-mustard: #FFD93D;
+  --color-sunglow: #FFC94A;
   --color-emerald: #62D2A2;
+  --color-ash-black: #2D2D2D;
+  --color-platinum: #EAEAEA;
 }
 
 @theme inline {
@@ -204,4 +207,41 @@
   body {
     @apply w-full h-screen bg-background text-foreground;
   }
+}
+
+#modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+
+  &.seen {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+  }
+
+  &.not-seen {
+    opacity: 0;
+    transform: translate(100%, 100%);
+    visibility: hidden;
+  }
+}
+
+.page-container {
+  position: relative;
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.table-display {
+  @apply w-full h-full bg-white dark:bg-neutral-800/40 px-6 py-8 rounded-xl;
 }
