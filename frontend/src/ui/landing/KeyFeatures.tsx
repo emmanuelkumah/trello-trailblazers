@@ -22,12 +22,12 @@ interface FeatureItemProps {
 
 const FeatureItem = ({ icon, title, description }: FeatureItemProps) => {
   return (
-    <div className='flex flex-col items-start'>
-      <div className='rounded-full mb-3 flex items-center justify-center'>
+    <div className='flex flex-col items-start p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow'>
+      <div className='rounded-full mb-4 flex items-center justify-center bg-gray-100 p-3'>
         <div className='flex items-center justify-center'>{icon}</div>
       </div>
       <h3 className='font-semibold text-lg mb-2'>{title}</h3>
-      <p className='text-sm text-gray-700 mb-3'>{description}</p>
+      <p className='text-sm text-gray-700 mb-4'>{description}</p>
       <Button variant='link' className='p-0 text-[#FF8E8E]'>
         Learn More →
       </Button>
@@ -42,10 +42,10 @@ const KeyFeatures = () => {
         <p className='text-sm text-gray-900 mb-4 text-center font-medium'>
           Features
         </p>
-        <h2 className='text-2xl font-bold text-center mb-6'>
+        <h2 className='text-4xl font-normal text-center mb-3'>
           Explore Our Key Features
         </h2>
-        <p className='text-sm text-gray-700 mb-8 text-center'>
+        <p className='text-base mb-9 text-center'>
           Manage expenses effortlessly with our intuitive tools.
         </p>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
