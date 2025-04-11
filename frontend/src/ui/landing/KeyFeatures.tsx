@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import keyFeatureImage from '@/assets/img/keyfeature-img.jpeg';
 
 const Icon = () => (
   <svg
@@ -26,10 +27,26 @@ const FeatureItem = ({ icon, title, description }: FeatureItemProps) => {
       <div className='rounded-full mb-4 flex items-center justify-center bg-gray-100 p-3'>
         <div className='flex items-center justify-center'>{icon}</div>
       </div>
-      <h3 className='font-semibold text-lg mb-2'>{title}</h3>
-      <p className='text-sm text-gray-700 mb-4'>{description}</p>
-      <Button variant='link' className='p-0 text-[#FF8E8E]'>
-        Learn More →
+      <h3 className='font-normal text-xl mb-2'>{title}</h3>
+      <p className='text-base text-gray-700 mb-4'>{description}</p>
+      <Button variant='link' className='text-black cursor-pointer rounded-full'>
+        Learn More
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          fill='currentColor'
+          className='-ml-1'
+          viewBox='0 0 24 24'
+        >
+          <path
+            fillRule='evenodd'
+            d='M8 4l8 8-8 8'
+            stroke='currentColor'
+            strokeWidth='2'
+            fill='none'
+          />
+        </svg>
       </Button>
     </div>
   );
@@ -48,22 +65,59 @@ const KeyFeatures = () => {
         <p className='text-base mb-9 text-center'>
           Manage expenses effortlessly with our intuitive tools.
         </p>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          <FeatureItem
-            icon={<Icon />}
-            title='Detailed Expense Tracking'
-            description='Keep track of every expense and never lose sight of your financial activities.'
-          />
-          <FeatureItem
-            icon={<Icon />}
-            title='Payment Status Dashboard'
-            description='Monitor all payment statuses in one central location for maximum convenience.'
-          />
-          <FeatureItem
-            icon={<Icon />}
-            title='Instant Push Notifications'
-            description='Stay updated with real-time alerts about group activities and payment reminders.'
-          />
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+            <div className='flex space-x-8'>
+            <FeatureItem
+              icon={<Icon />}
+              title='Detailed Expense Tracking'
+              description='Keep track of every expense and never lose sight of your financial activities.'
+            />
+            <FeatureItem
+              icon={<Icon />}
+              title='Payment Status Dashboard'
+              description='Monitor all payment statuses in one central location for maximum convenience.'
+            />
+            </div>
+
+          <div className='flex flex-col md:flex-row items-stretch justify-between border border-gray-200 rounded-lg hover:shadow-md transition-shadow overflow-hidden'>
+            <div className='flex-1'>
+              <img
+          src={keyFeatureImage}
+          alt='Feature Image'
+          className='shadow-md h-full object-cover'
+              />
+            </div>
+            <div className='flex flex-col flex-1 md:pl-6 justify-center items-start'>
+              <h3 className='font-normal text-xl mb-2'>
+          Visualize Your Spending
+              </h3>
+              <p className='text-base text-gray-700 mb-4'>
+          Get insights into your expense patterns.
+              </p>
+              <Button
+          variant='link'
+          className='text-black cursor-pointer rounded-full'
+              >
+          Learn More
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            fill='currentColor'
+            className='-ml-1'
+            viewBox='0 0 24 24'
+          >
+            <path
+              fillRule='evenodd'
+              d='M8 4l8 8-8 8'
+              stroke='currentColor'
+              strokeWidth='2'
+              fill='none'
+            />
+          </svg>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
