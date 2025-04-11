@@ -16,10 +16,28 @@ const GroupsFeature = () => {
               can create and join groups effortlessly, ensuring everyone stays
               on the same page.
             </p>
-            <Button variant='link' className='p-0 text-[#FF8E8E]'>
-              Learn More →
+            <div className='flex items-center mb-4'>
+              <div className='flex flex-col mr-4'>
+                <h3 className='text-lg font-normal'>Create Groups</h3>
+                <p className='text-sm text-gray-500'>
+                  Set up your group with a title and purpose in just a few
+                  clicks.
+                </p>
+              </div>
+              <div className='flex flex-col'>
+                <h3 className='text-lg font-normal'>Join Groups</h3>
+                <p className='text-sm text-gray-500'>
+                  Easily join existing groups via link or unique group code.
+                </p>
+              </div>
+            </div>
+            {/* Create a secondary button with the text "sign up" */}
+            <Button variant='secondary' className='mr-4 bg-transparent rounded-full border-2 cursor-pointer'>
+              Sign Up
             </Button>
-            {/* Create a  */}
+            <Button variant='link' className='p-0 text-black'>
+              Learn More
+            </Button>
           </div>
           <div className='order-2 md:order-2'>
             <img
