@@ -65,8 +65,8 @@ const KeyFeatures = () => {
         <p className='text-base mb-9 text-center'>
           Manage expenses effortlessly with our intuitive tools.
         </p>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <div className='flex space-x-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+            <div className='flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8'>
             <FeatureItem
               icon={<Icon />}
               title='Detailed Expense Tracking'
@@ -80,41 +80,41 @@ const KeyFeatures = () => {
             </div>
 
           <div className='flex flex-col md:flex-row items-stretch justify-between border border-gray-200 rounded-lg hover:shadow-md transition-shadow overflow-hidden'>
-            <div className='flex-1'>
+            <div className='w-full md:w-1/2'>
               <img
-          src={keyFeatureImage}
-          alt='Feature Image'
-          className='shadow-md h-full object-cover'
+                src={keyFeatureImage}
+                alt='Feature Image'
+                className='shadow-md w-full h-full object-cover'
               />
             </div>
-            <div className='flex flex-col flex-1 md:pl-6 justify-center items-start'>
+            <div className='flex flex-col flex-1 p-6 justify-center items-start'>
               <h3 className='font-normal text-xl mb-2'>
-          Visualize Your Spending
+                Visualize Your Spending
               </h3>
               <p className='text-base text-gray-700 mb-4'>
-          Get insights into your expense patterns.
+                Get insights into your expense patterns.
               </p>
               <Button
-          variant='link'
-          className='text-black cursor-pointer rounded-full'
+                variant='link'
+                className='text-black cursor-pointer rounded-full'
               >
-          Learn More
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            fill='currentColor'
-            className='-ml-1'
-            viewBox='0 0 24 24'
-          >
-            <path
-              fillRule='evenodd'
-              d='M8 4l8 8-8 8'
-              stroke='currentColor'
-              strokeWidth='2'
-              fill='none'
-            />
-          </svg>
+                Learn More
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='24'
+                  height='24'
+                  fill='currentColor'
+                  className='-ml-1'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M8 4l8 8-8 8'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    fill='none'
+                  />
+                </svg>
               </Button>
             </div>
           </div>
