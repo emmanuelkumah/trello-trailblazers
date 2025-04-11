@@ -1,10 +1,12 @@
+import webflowLogo from '@/assets/img/webflow-logo.png';
+
 const Testimonials = () => {
   return (
     <section className='py-16 bg-[#FFE8E8]'>
       <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 items-center'>
           {/* Left Column: Grey Box */}
-          <div className='bg-gray-800 h-64 rounded-lg flex items-center justify-center'>
+          <div className='bg-gray-800 h-100 rounded-lg flex items-center justify-center'>
             <div className='text-white text-center'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -40,8 +42,17 @@ const Testimonials = () => {
               "Divvy has transformed the way we manage our group expenses. It's
               simple, efficient, and has made splitting costs a breeze!"
             </p>
-            <div className='font-semibold'>
-              Alex Johnson, Divvy Customer
+            <div className='flex items-center justify-center lg:justify-start w-full'>
+              <div className='text-center lg:text-left border-r-2 pr-4 border-gray-500'>
+                <div className='font-sarabun font-semibold'>Alex Johnson</div>
+                <div className='text-sm'>Project Manager, TechCo</div>
+              </div>
+              <div className='ml-6'>
+                <img
+                  src={webflowLogo}
+                  alt='Webflow'
+                />
+              </div>
             </div>
           </div>
         </div>
