@@ -7,17 +7,15 @@ const ManagementFeature = () => {
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div>
-            <h2 className='text-2xl font-bold mb-3'>
+            <h2 className='text-3xl font-normal mb-3'>
               Effortless Expense Management: Track, Split, and Settle with Ease
             </h2>
-            <p className='mb-4'>
-              Split costs with friends effortlessly. With one simple
-              calculation, everyone pays their fair share. No more confusion, no
-              more mental math—just simple, fair expense splitting for all.
+            <p className='mb-4 text-base'>
+              Divvy simplifies the way you manage shared expenses, allowing you
+              to add, split, and track costs effortlessly. With our intuitive
+              platform, settling up with friends or family has never been
+              easier.
             </p>
-            <Button variant='link' className='p-0 text-[#FF8E8E]'>
-              Learn More →
-            </Button>
           </div>
           <div>
             <img

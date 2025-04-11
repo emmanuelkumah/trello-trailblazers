@@ -8,7 +8,7 @@ const GroupsFeature = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
           <div className='order-1 md:order-1'>
             <p className='font-semibold mb-3 font-sarabun'>Groups</p>
-            <h2 className='text-3 xl font-normal mb-3'>
+            <h2 className='text-3xl font-normal mb-3'>
               Easily Create and Join Expense Groups
             </h2>
             <p className='mb-4'>
