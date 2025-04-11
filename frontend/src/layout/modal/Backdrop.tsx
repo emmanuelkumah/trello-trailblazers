@@ -10,7 +10,7 @@ export default function Backdrop({ show }: { show: boolean }) {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-screen transition-all duration-200 ease-in-out
+      className={`w-full h-screen fixed top-0 left-0 transition-all duration-200 ease-in-out
         ${show ? "bg-black/40 dark:bg-white/10 backdrop-blur-[2px] z-[99]" : "bg-none dark:bg-none backdrop-blur-none"}
       `}
       style={{

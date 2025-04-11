@@ -33,14 +33,14 @@ export default function TopnavActions({ show, setShow }: ActionTypes) {
 
 
   return (
-    <div className="absolute right-10 mt-18">
+    <div className="absolute right-3 md:right-10 mt-18">
       <Actions
         actions={actions}
         onActionClick={(action) => handleActionClick(action.id as string)}
         show={show}
         setShow={setShow}
         positionThreshold={500}
-        isIconReverse
+        // isIconReverse
         // buttonClass={actions}
       />
     </div>
