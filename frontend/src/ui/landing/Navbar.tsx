@@ -7,11 +7,11 @@ const Navbar = () => {
   return (
     <header className='bg-[#FFE8E8] py-4'>
       <div className='container mx-auto px-4'>
-        <div className='flex justify-start items-center space-x-8'>
+        <div className='flex justify-between items-center'>
           <div className='text-2xl font-medium'>Divvy</div>
 
           {/* Desktop Navigation */}
-          <nav className='hidden md:flex items-center space-x-8'>
+          <nav className='hidden md:flex items-center space-x-8 ml-6'>
             <a
               href='#'
               className='text-black hover:text-gray-500 transition duration-300 cursor-pointer font-sarabun'
