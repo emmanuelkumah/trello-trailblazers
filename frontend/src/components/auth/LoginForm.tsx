@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useMutation } from "@tanstack/react-query";
 
 const LoginForm: React.FC = () => {
   const { login, isLoading, error, clearError } = useAuthStore();
@@ -26,9 +27,25 @@ const LoginForm: React.FC = () => {
     },
   });
 
+  const useLoginMutation = () => {
+    return useMutation({
+      mutationFn: ({ email, password }: { email: string; password: string }) =>
+        login(email, password),
+    });
+  };
+  const { mutateAsync: loginMutate } = useLoginMutation();
+
   const onSubmit = async (data: LoginFormValues) => {
-    clearError();
-    await login(data.email, data.password);
+    try {
+      clearError();
+      const userData = await loginMutate({
+        email: data.email,
+        password: data.password,
+      });
+      console.log("Logged in!", userData);
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (

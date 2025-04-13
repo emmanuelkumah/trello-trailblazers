@@ -39,14 +39,14 @@ const AuthPage: React.FC = () => {
           <TabsTrigger
             value="signup"
             className="cursor-pointer px-6 rounded-full text-black transition-all duration-300
-               bg-gray-300 dark:bg-[#2D2D2D] dark:text-white data-[state=active]:shadow-md"
+               bg-gray-300 dark:bg-[#2D2D2D] dark:data-[state=active]:text-white dark:text-white data-[state=active]:shadow-md"
           >
             Sign Up
           </TabsTrigger>
           <TabsTrigger
             value="login"
             className="cursor-pointer px-6 rounded-full text-black transition-all duration-300
-               bg-gray-300 dark:bg-[#2D2D2D] dark:text-white data-[state=active]:shadow-md"
+               bg-gray-300 dark:bg-[#2D2D2D] dark:data-[state=active]:text-white dark:text-white data-[state=active]:shadow-md"
           >
             Login
           </TabsTrigger>

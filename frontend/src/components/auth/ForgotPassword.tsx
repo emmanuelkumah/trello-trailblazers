@@ -211,6 +211,9 @@ const ForgotPasswordFlow: React.FC = () => {
                     <Input
                       placeholder="Enter 6-digit code"
                       className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300"
+                      type="number"
+                      minLength={6}
+                      maxLength={6}
                       {...field}
                     />
                   </FormControl>

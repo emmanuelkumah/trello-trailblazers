@@ -35,10 +35,10 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
             <h2 className="text-4xl font-bold mb-4">{title}</h2>
             <p className="text-lg">{subtitle}</p>
             {/* Decorative dot */}
-            <div className="absolute bottom-8 left-8 flex">
-              <div className="w-5 h-5 rounded-full bg-purple-500" />
-              <div className="w-5 h-5 rounded-full bg-red-500 -ml-[13px]" />
-              <div className="w-5 h-5 rounded-full bg-blue-500 -ml-[13px]" />
+            <div className="absolute bottom-8 left-8 flex opacity-60 hover:opacity-100 cursor-pointer">
+              <div className="w-6 h-6 rounded-full bg-[#220066]" />
+              <div className="w-6 h-6 rounded-full bg-[#320194] -ml-[18px] -translate-y-[1px]" />
+              <div className="w-6 h-6 rounded-full bg-[#220066] -ml-[18px] -translate-y-[2px]" />
             </div>
           </div>
         </div>

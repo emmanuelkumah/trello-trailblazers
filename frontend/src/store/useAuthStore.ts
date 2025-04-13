@@ -1,3 +1,4 @@
+import axios from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -38,27 +39,44 @@ const useAuthStore = create<AuthState>()(
 
       // In a real app, these would make API calls
       login: async (email: string, password: string) => {
+        if (!email || !password) return;
         try {
           set({ isLoading: true, error: null });
-
-          // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-
-          // For demo purposes, we'll just check if the email contains "error"
-          if (email.includes("error")) {
-            throw new Error("Invalid credentials");
+          const res = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          });
+          if (!res.ok) {
+            const error = await res.json();
+            throw new Error(
+              error.message || "An error occured while logging you in"
+            );
           }
-
-          // Mock user data
+          // if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
+          const data = await res.json();
+          // const user: User = {
+          //   id: res.data.id,
+          //   fullName: res.data.fullName,
+          //   email: res.data.email,
+          //   phoneNumber: res.data.phoneNumber,
+          //   country: res.data.country,
+          //   stateRegion: res.data.stateRegion,
+          // };
           const user: User = {
-            id: "123",
-            fullName: email.includes("franklin") ? "Franklin" : "New User",
-            email,
-            phoneNumber: "",
-            country: "",
-            stateRegion: "",
+            id: data.id,
+            fullName: data.fullName,
+            email: data.email,
+            phoneNumber: data.phoneNumber,
+            country: data.country,
+            stateRegion: data.stateRegion,
           };
-
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, type RegisterFormValues } from "@/lib/validation";
@@ -20,37 +20,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import useCountryOptions from "@/hooks/useCountryOptions";
+import axios from "axios";
 
 // Mock data for dropdowns
-const countries = [
-  { value: "us", label: "United States" },
-  { value: "ca", label: "Canada" },
-  { value: "uk", label: "United Kingdom" },
-  { value: "au", label: "Australia" },
-];
-
-const states = {
-  us: [
-    { value: "ny", label: "New York" },
-    { value: "ca", label: "California" },
-    { value: "tx", label: "Texas" },
-  ],
-  ca: [
-    { value: "on", label: "Ontario" },
-    { value: "qc", label: "Quebec" },
-    { value: "bc", label: "British Columbia" },
-  ],
-  uk: [
-    { value: "eng", label: "England" },
-    { value: "sco", label: "Scotland" },
-    { value: "wal", label: "Wales" },
-  ],
-  au: [
-    { value: "nsw", label: "New South Wales" },
-    { value: "qld", label: "Queensland" },
-    { value: "vic", label: "Victoria" },
-  ],
-};
 
 const RegisterForm: React.FC = () => {
   const {
@@ -59,7 +32,20 @@ const RegisterForm: React.FC = () => {
     error,
     clearError,
   } = useAuthStore();
-  const [selectedCountry, setSelectedCountry] = React.useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const countries = useCountryOptions();
+
+  useEffect(() => {
+    const getRegion = async () => {
+      if (!selectedCountry) return;
+
+      const region = await axios
+        .get(`https://restcountries.com/v3.1/region/${selectedCountry}`)
+        .then((res) => res.data);
+      console.log(region);
+      const states = region.map((country: any) => country.name.common);
+    };
+  }, [selectedCountry]);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
