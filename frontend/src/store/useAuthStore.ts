@@ -31,7 +31,7 @@ interface AuthState {
 // Create the store
 const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
       isAuthenticated: false,
       isLoading: false,
@@ -42,41 +42,21 @@ const useAuthStore = create<AuthState>()(
         if (!email || !password) return;
         try {
           set({ isLoading: true, error: null });
-          const res = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              password,
-            }),
+          const res = await axios.post("http://localhost:5000/api/auth/login", {
+            email,
+            password,
           });
-          if (!res.ok) {
-            const error = await res.json();
-            throw new Error(
-              error.message || "An error occured while logging you in"
-            );
-          }
-          // if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
-          const data = await res.json();
-          // const user: User = {
-          //   id: res.data.id,
-          //   fullName: res.data.fullName,
-          //   email: res.data.email,
-          //   phoneNumber: res.data.phoneNumber,
-          //   country: res.data.country,
-          //   stateRegion: res.data.stateRegion,
-          // };
+          if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
+
           const user: User = {
-            id: data.id,
-            fullName: data.fullName,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-            country: data.country,
-            stateRegion: data.stateRegion,
+            id: res.data.id,
+            fullName: res.data.fullName,
+            email: res.data.email,
+            phoneNumber: res.data.phoneNumber,
+            country: res.data.country,
+            stateRegion: res.data.stateRegion,
           };
+          localStorage.setItem("user", JSON.stringify(user));
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({
@@ -87,23 +67,32 @@ const useAuthStore = create<AuthState>()(
       },
 
       register: async (userData) => {
+        if (!userData.email || !userData.password) return;
         try {
           set({ isLoading: true, error: null });
 
-          // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 1500));
+          const res = await axios.post(
+            "http://localhost:5000/api/auth/register",
+            {
+              fullname: userData.fullName,
+              phone_number: userData.phoneNumber,
+              country: userData.country,
+              state: userData.stateRegion,
+              email: userData.email,
+              password: userData.password,
+            }
+          );
+          if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
 
-          // For demo purposes, we'll just check if the email contains "error"
-          if (userData.email.includes("error")) {
-            throw new Error("Email already in use");
-          }
-
-          // Mock user data with generated ID
           const user: User = {
-            id: Math.random().toString(36).substring(2, 9),
-            ...userData,
+            id: res.data.id,
+            fullName: res.data.fullName,
+            email: res.data.email,
+            phoneNumber: res.data.phoneNumber,
+            country: res.data.country,
+            stateRegion: res.data.stateRegion,
           };
-
+          localStorage.setItem("user", JSON.stringify(user));
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({
@@ -139,6 +128,7 @@ const useAuthStore = create<AuthState>()(
       },
 
       verifyOTP: async (email: string, otp: string) => {
+        console.log(email);
         try {
           set({ isLoading: true, error: null });
 
@@ -162,6 +152,7 @@ const useAuthStore = create<AuthState>()(
       },
 
       setNewPassword: async (email: string, password: string) => {
+        console.log(email, password);
         try {
           set({ isLoading: true, error: null });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, type RegisterFormValues } from "@/lib/validation";
@@ -20,8 +20,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import useCountryOptions from "@/hooks/useCountryOptions";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 // Mock data for dropdowns
 
@@ -33,19 +33,19 @@ const RegisterForm: React.FC = () => {
     clearError,
   } = useAuthStore();
   const [selectedCountry, setSelectedCountry] = useState("");
-  const countries = useCountryOptions();
+  const [states, setStates] = useState<string[]>([]);
 
-  useEffect(() => {
-    const getRegion = async () => {
-      if (!selectedCountry) return;
-
-      const region = await axios
-        .get(`https://restcountries.com/v3.1/region/${selectedCountry}`)
-        .then((res) => res.data);
-      console.log(region);
-      const states = region.map((country: any) => country.name.common);
-    };
-  }, [selectedCountry]);
+  const {
+    data: countries,
+    isLoading: isFetchingCountries,
+    error: countriesError,
+  } = useQuery({
+    queryKey: ["countries"],
+    queryFn: () =>
+      axios
+        .get("https://countriesnow.space/api/v0.1/countries")
+        .then((res) => res.data.data),
+  });
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -63,14 +63,40 @@ const RegisterForm: React.FC = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     clearError();
     // Remove confirmPassword before sending to API
+    console.log(data);
     const { confirmPassword, ...userData } = data;
+    console.log(confirmPassword);
+
     await registerUser(userData);
   };
 
-  const handleCountryChange = (value: string) => {
+  const handleCountryChange = async (value: string) => {
     setSelectedCountry(value);
     form.setValue("country", value, { shouldValidate: true });
-    form.setValue("stateRegion", "", { shouldValidate: true });
+    form.setValue("stateRegion", "", { shouldValidate: false });
+    setStates([]);
+
+    try {
+      const response = await axios.post(
+        "https://countriesnow.space/api/v0.1/countries/states",
+        {
+          country: value,
+        }
+      );
+
+      if (response.data?.data?.states) {
+        setStates(
+          response.data.data.states.map(
+            (s: { name: string; state_code: string }) => s.name
+          )
+        );
+      } else {
+        setStates([]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch states:", error);
+      setStates([]);
+    }
   };
 
   return (
@@ -121,22 +147,35 @@ const RegisterForm: React.FC = () => {
                 <FormLabel>Country</FormLabel>
                 <Select
                   onValueChange={(value) => {
+                    console.log("Selected country:", value);
                     field.onChange(value);
                     handleCountryChange(value);
                   }}
                   defaultValue={field.value}
                 >
                   <FormControl>
-                    <SelectTrigger className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300">
+                    <SelectTrigger className="w-full min-w-[200px] border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300">
                       <SelectValue placeholder="Select Country" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {countries.map((country) => (
-                      <SelectItem key={country.value} value={country.value}>
-                        {country.label}
-                      </SelectItem>
-                    ))}
+                    {!isFetchingCountries &&
+                      countries?.map(
+                        (country: {
+                          iso2?: string;
+                          iso3?: string;
+                          country?: string;
+                          cities?: string[];
+                        }) => (
+                          <SelectItem
+                            key={country.country}
+                            value={country.country || ""}
+                          >
+                            {country.country}
+                          </SelectItem>
+                        )
+                      )}
+                    {countriesError && <p>Error fetching countries</p>}
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -156,22 +195,19 @@ const RegisterForm: React.FC = () => {
                   disabled={!selectedCountry}
                 >
                   <FormControl>
-                    <SelectTrigger className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300">
+                    <SelectTrigger className="w-full min-w-[200px] border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300">
                       <SelectValue placeholder="Select State/Region" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {selectedCountry &&
-                      states[selectedCountry as keyof typeof states]?.map(
-                        (state) => (
-                          <SelectItem key={state.value} value={state.value}>
-                            {state.label}
-                          </SelectItem>
-                        )
-                      )}
+                    {states.map((state) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                {form.formState.isSubmitted && <FormMessage />}
               </FormItem>
             )}
           />
