@@ -115,10 +115,16 @@ const Navbar = () => {
               >
                 More Links
               </a>
-              <Button className='border border-gray-300 text-black bg-transparent rounded-full w-full transition duration-300 hover:bg-gray-200 cursor-pointer'>
+              <Button
+                className='border border-gray-300 text-black bg-transparent rounded-full w-full transition duration-300 hover:bg-gray-200 cursor-pointer'
+                onClick={() => (window.location.href = '/auth')}
+              >
                 Join
               </Button>
-              <Button className='bg-[#FF8E8E] text-white rounded-full w-full transition duration-300 hover:bg-[#FF7070] hover:shadow-lg cursor-pointer'>
+              <Button
+                className='bg-[#FF8E8E] text-white rounded-full w-full transition duration-300 hover:bg-[#FF7070] hover:shadow-lg cursor-pointer'
+                onClick={() => (window.location.href = '/auth/register')}
+              >
                 Sign Up
               </Button>
             </nav>
