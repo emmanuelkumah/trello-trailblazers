@@ -43,6 +43,12 @@ export type ReuseModalTypes = {
   onClose: () => void;
 };
 
+export type Action = {
+  id: number;
+  label: string;
+  icon: string;
+};
+
 export type ContentType = {
   id: string;
   title: string;
