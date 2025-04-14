@@ -1,4 +1,3 @@
-import { UUID } from "crypto";
 import { HTMLAttributes, ReactNode } from "react";
 
 export type TypographyProps = {
