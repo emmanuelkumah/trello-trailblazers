@@ -37,17 +37,13 @@ export default function Dashboard() {
     navigate("/user/all-groups");
   };
 
-  const handleNavigateToGroup = (slug: string) => {
-    navigate(`/user/groups/${slug}`);
-  };
-
   // Process expenses for each group
   const getGroupExpensesInfo = (groupId: string) => {
     const expenses = getExpensesByGroupId(groupId);
-    
+
     // Get total amount from all expenses
     const totalAmount = expenses.reduce((total, expense) => total + expense.amount, 0);
-    
+
     // Get unique participants count
     const participantIds = new Set();
     expenses.forEach(expense => {
@@ -55,7 +51,7 @@ export default function Dashboard() {
         participantIds.add(participant.id);
       });
     });
-    
+
     // Format recent expenses for display
     const recentExpenses = expenses.slice(0, 5).map(expense => {
       // Map expense status to ContentType status
@@ -65,19 +61,19 @@ export default function Dashboard() {
       } else {
         status = "ongoing";
       }
-      
+
       return {
         id: expense.id,
         title: expense.title,
         price: expense.amount,
         status: status,
         members: expense.participants.length,
-        action: expense.participants.every(p => p.hasPaid) 
+        action: expense.participants.every(p => p.hasPaid)
           ? "contributed" as const
           : "pending contribution" as const
       };
     });
-    
+
     return {
       total: totalAmount,
       members: participantIds.size || 0,
@@ -168,8 +164,8 @@ export default function Dashboard() {
 
           {groups.length > 3 && (
             <div className="w-full flex justify-center mt-4">
-              <Button 
-                variant="default" 
+              <Button
+                variant="default"
                 className="bg-light-red rounded-full"
                 onClick={navigateToGroups}
               >
