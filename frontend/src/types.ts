@@ -1,4 +1,3 @@
-import { UUID } from "crypto";
 import { HTMLAttributes, ReactNode } from "react";
 
 export type TypographyProps = {
@@ -41,6 +40,12 @@ export type ModalProps = {
 export type ReuseModalTypes = {
   show: boolean;
   onClose: () => void;
+};
+
+export type Action = {
+  id: number;
+  label: string;
+  icon: string;
 };
 
 export type ContentType = {

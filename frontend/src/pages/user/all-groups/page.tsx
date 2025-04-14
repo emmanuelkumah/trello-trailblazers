@@ -1,29 +1,24 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import useDeviceSize from "@/hooks/useDeviceSize";
-import { analytics } from "@/ui/user/_data";
-import AnalyticsCard from "@/ui/user/analyticsCard";
 import CreateGroupModal from "@/ui/user/createGroupModal";
 import GroupCard from "@/ui/user/groupCard";
 import JoinGroupModal from "@/ui/user/joinGroupModal";
 import { Icon } from "@iconify/react";
-import ActionsModal from "@/ui/user/mobile/actionsModal";
+import { useNavigate } from "react-router-dom";
 import { useDivvyGroupStore } from "@/store/GroupStore";
 import { useExpenseStore } from "@/store/ExpenseStore";
 import { ContentType } from "@/types";
 
-export default function Dashboard() {
-  let user = "Franklin";
+export default function AllGroups() {
   const navigate = useNavigate();
-  const isTablet = useDeviceSize();
-  const { data: groups } = useDivvyGroupStore();
-  const { getExpensesByGroupId } = useExpenseStore();
-
   const [openModal, setModalOpen] = useState({
     create: false,
     join: false
   });
+  
+  // Get groups from store
+  const { data: groups } = useDivvyGroupStore();
+  const { getExpensesByGroupId } = useExpenseStore();
 
   const handleCreateModalToggle = () => {
     setModalOpen((prev) => ({ ...prev, create: !prev.create }));
@@ -33,17 +28,17 @@ export default function Dashboard() {
     setModalOpen((prev) => ({ ...prev, join: !prev.join }));
   };
 
-  const navigateToGroups = () => {
-    navigate("/user/all-groups");
+  const handleNavigateBack = () => {
+    navigate(-1);
   };
 
   // Process expenses for each group
   const getGroupExpensesInfo = (groupId: string) => {
     const expenses = getExpensesByGroupId(groupId);
-
+    
     // Get total amount from all expenses
     const totalAmount = expenses.reduce((total, expense) => total + expense.amount, 0);
-
+    
     // Get unique participants count
     const participantIds = new Set();
     expenses.forEach(expense => {
@@ -51,7 +46,7 @@ export default function Dashboard() {
         participantIds.add(participant.id);
       });
     });
-
+    
     // Format recent expenses for display
     const recentExpenses = expenses.slice(0, 5).map(expense => {
       // Map expense status to ContentType status
@@ -61,19 +56,19 @@ export default function Dashboard() {
       } else {
         status = "ongoing";
       }
-
+      
       return {
         id: expense.id,
         title: expense.title,
         price: expense.amount,
         status: status,
         members: expense.participants.length,
-        action: expense.participants.every(p => p.hasPaid)
+        action: expense.participants.every(p => p.hasPaid) 
           ? "contributed" as const
           : "pending contribution" as const
       };
     });
-
+    
     return {
       total: totalAmount,
       members: participantIds.size || 0,
@@ -85,11 +80,17 @@ export default function Dashboard() {
     <>
       <main className="w-full flex flex-col gap-6">
         <header className="w-full flex items-center justify-between">
-          <aside>
-            <h1>Hello {user},</h1>
-            <p>Let's get you up to speed</p>
+          <aside className="flex items-center gap-2">
+            <Icon
+              role="link"
+              icon="ic:sharp-arrow-back"
+              width={24}
+              height={24}
+              className="cursor-pointer"
+              onClick={handleNavigateBack}
+            />
+            <h2>Your Groups</h2>
           </aside>
-
           <aside className="hidden md:flex items-center gap-8">
             <Button
               variant="default"
@@ -111,39 +112,10 @@ export default function Dashboard() {
             </Button>
           </aside>
         </header>
-
-        <section
-          className={`w-full ${isTablet
-            ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
-            : "grid grid-cols-3 gap-6"
-            }`}
-        >
-          {analytics.map((item, idx) => (
-            <AnalyticsCard
-              key={idx}
-              title={item?.title}
-              content={item?.content}
-              description={item?.description}
-            />
-          ))}
-        </section>
-
-        <section className="w-full flex flex-col gap-4">
-          <header className="w-full flex items-center justify-between">
-            <h3>Your Groups</h3>
-            <Button
-              variant="secondary"
-              size="lg"
-              className="bg-transparent shadow-none hover:bg-transparent dark:bg-transparent border-none text-light-red"
-              onClick={navigateToGroups}
-            >
-              View More
-              <Icon icon="ic:twotone-read-more" width={32} height={32} />
-            </Button>
-          </header>
-
+        
+        {groups.length > 0 ? (
           <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4 lg:gap-0">
-            {groups.slice(0, 3).map((group) => {
+            {groups.map((group) => {
               const { total, members, content } = getGroupExpensesInfo(group.id);
               return (
                 <GroupCard
@@ -161,23 +133,32 @@ export default function Dashboard() {
               );
             })}
           </section>
-
-          {groups.length > 3 && (
-            <div className="w-full flex justify-center mt-4">
+        ) : (
+          <div className="w-full py-12 flex flex-col items-center justify-center">
+            <Icon icon="carbon:no-data" width={64} height={64} className="text-gray-400 mb-4" />
+            <h3 className="text-xl font-medium">No Groups Yet</h3>
+            <p className="text-gray-500 mt-2">Create or join a group to get started</p>
+            <div className="flex gap-4 mt-6">
               <Button
                 variant="default"
-                className="bg-light-red rounded-full"
-                onClick={navigateToGroups}
+                className="bg-light-red gap-2 rounded-full"
+                onClick={handleCreateModalToggle}
               >
-                See All Groups
-                <Icon icon="tabler:arrow-right" className="ml-1" width={16} />
+                Create Group
+                <Icon icon="mdi:users-add-outline" width={20} />
+              </Button>
+              <Button
+                variant="outline"
+                className="border-mustard text-mustard gap-2 rounded-full"
+                onClick={handleJoinModalToggle}
+              >
+                Join Group
+                <Icon icon="fluent:cube-add-20-filled" width={20} />
               </Button>
             </div>
-          )}
-        </section>
+          </div>
+        )}
       </main>
-
-      <ActionsModal />
 
       <CreateGroupModal
         show={openModal.create}
