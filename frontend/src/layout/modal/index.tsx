@@ -46,7 +46,7 @@ export default function Modal({
           id="modal"
           className={`relative h-max max-h-[90%] z-[999] bg-transparent rounded-3xl overflow-x-hidden transition-all duration-500 ease-out 
           ${delayShow ? "seen" : "not-seen"}
-          ${isSmall ? "w-[45%] lg:w-[25%]" : "w-[95%] md:max-w-2xl"}
+          ${isSmall ? "max-md:w-[80%] w-[45%] lg:w-[25%]" : "w-[95%] md:max-w-2xl"}
           `}
         >
           <div className="w-full h-full px-[3%] py-6 flex flex-col gap-4 bg-white dark:bg-black overflow-x-hidden">
