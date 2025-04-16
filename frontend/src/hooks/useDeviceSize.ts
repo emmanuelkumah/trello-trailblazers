@@ -19,4 +19,3 @@ const useDeviceSize = () => {
 };
 
 export default useDeviceSize;
-  
