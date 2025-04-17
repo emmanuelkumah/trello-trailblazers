@@ -76,7 +76,7 @@ export default function Actions({
   return (
     <div
       ref={actionRef}
-      className={`absolute ${isBottom ? "bottom-2" : "-top-2"} right-full w-48 h-max py-2 flex flex-col gap-y-2 bg-white dark:bg-navy-800 border border-gray-200 dark:border-gray-500 z-50 rounded-xl shadow-md transition-all duration-150 ease-in-out 
+      className={`absolute ${isBottom ? "bottom-2" : "-top-2"} right-full min-w-48 w-max h-max flex flex-col bg-white dark:bg-ash-black dark:text-white border border-gray-200 dark:border-gray-500 z-50 rounded-xl shadow-md transition-all duration-150 ease-in-out overflow-hidden 
         ${show ? "scale-100 opacity-100" : "scale-0 opacity-0"} 
         ${containerClass}`}
       aria-haspopup="true"
@@ -89,7 +89,7 @@ export default function Actions({
         <button
           key={action.id}
           type="button"
-          className={`w-full flex gap-4 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-600 transition ${isIconReverse ? "items-start w-max flex-row-reverse" : "items-center flex-row"} ${buttonClass}`}
+          className={`w-full flex gap-4 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-600 transition ${isIconReverse ? "items-start w-max flex-row-reverse" : "items-center flex-row"} ${buttonClass} ${actions.indexOf(action) !== actions.length - 1 ? "border-b border-gray-200 dark:border-gray-500" : ""}`}
           onClick={() => handleActionClick(action)}
         >
           {action.icon ? (
@@ -101,7 +101,7 @@ export default function Actions({
               )}
             </span>
           ) : null}
-          <span>{action.label}</span>
+          <span className="whitespace-nowrap">{action.label}</span>
         </button>
       ))}
     </div>

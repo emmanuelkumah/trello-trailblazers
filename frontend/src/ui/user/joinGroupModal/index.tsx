@@ -34,7 +34,7 @@ export default function JoinGroupModal({ show, onClose }: ReuseModalTypes) {
           </Button>
 
           <Button variant="default" size="lg" className="w-full bg-mustard flex gap-3 rounded-full">
-            Create Group
+            Join Group
             <Icon icon="mdi:users-add-outline" width={24} height={24} />
           </Button>
         </section>
