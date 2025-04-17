@@ -8,24 +8,23 @@ import JoinGroupModal from "@/ui/user/joinGroupModal";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 
-
 export default function Dashboard() {
-  let user = "Franklin";
-  const isMobile = useDeviceSize();
+  const user = "Franklin";
+  // const isMobile = useDeviceSize();
   const isTablet = useDeviceSize();
 
   const [openModal, setModalOpen] = useState({
     create: false,
-    join: false
-  })
+    join: false,
+  });
 
   const handleCreateModalToggle = () => {
-    setModalOpen((prev) => ({ ...prev, create: !prev.create }))
-  }
+    setModalOpen((prev) => ({ ...prev, create: !prev.create }));
+  };
 
   const handleJoinModalToggle = () => {
-    setModalOpen((prev) => ({ ...prev, join: !prev.join }))
-  }
+    setModalOpen((prev) => ({ ...prev, join: !prev.join }));
+  };
 
   return (
     <>
@@ -59,10 +58,11 @@ export default function Dashboard() {
         </header>
 
         <section
-          className={`w-full ${isTablet
-            ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
-            : "grid grid-cols-3 gap-6"
-            }`}
+          className={`w-full ${
+            isTablet
+              ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
+              : "grid grid-cols-3 gap-6"
+          }`}
         >
           {analytics.map((item, idx) => (
             <AnalyticsCard
@@ -74,7 +74,6 @@ export default function Dashboard() {
           ))}
         </section>
 
-
         <section className="w-full flex flex-col gap-4">
           <header className="w-full flex items-center justify-between">
             <h3>Your Groups</h3>
@@ -82,7 +81,7 @@ export default function Dashboard() {
               variant="secondary"
               size="lg"
               className="bg-transparent shadow-none hover:bg-transparent dark:bg-transparent border-none text-light-red"
-            // onClick={handleCreateModalToggle}
+              // onClick={handleCreateModalToggle}
             >
               View More
               <Icon icon="ic:twotone-read-more" width={32} height={32} />
@@ -121,10 +120,7 @@ export default function Dashboard() {
         show={openModal.create}
         onClose={handleCreateModalToggle}
       />
-      <JoinGroupModal
-        show={openModal.join}
-        onClose={handleJoinModalToggle}
-      />
+      <JoinGroupModal show={openModal.join} onClose={handleJoinModalToggle} />
     </>
-  )
+  );
 }
