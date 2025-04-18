@@ -29,7 +29,7 @@ export default function ExpensesDisplay({ groupId, onExpenseClick }: ExpensesDis
                 role="button"
                 type="button"
                 key={expense.id}
-                className={`w-full text-left p-2 space-y-2 border dark:border-gray-400 rounded-sm transition-colors ${
+                className={`w-full text-left p-2 space-y-2 border dark:border-gray-400 rounded-sm transition-colors ₦{
                   activeExpenseId === expense.id 
                     ? 'bg-floral dark:bg-black/30 border-mustard dark:border-sunglow' 
                     : 'hover:bg-floral dark:hover:bg-black/30'
@@ -38,7 +38,7 @@ export default function ExpensesDisplay({ groupId, onExpenseClick }: ExpensesDis
               >
                 <aside className='flex items-center justify-between'>
                   <h3>{expense?.title}</h3>
-                  <span>${expense?.amount}</span>
+                  <span>₦{expense?.amount}</span>
                 </aside>
                 <aside className='flex items-center justify-between'>
                   <span>

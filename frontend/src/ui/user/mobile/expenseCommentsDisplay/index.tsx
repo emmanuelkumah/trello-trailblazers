@@ -7,6 +7,7 @@ import { useExpenseStore } from "@/store/ExpenseStore";
 import { useEffect, useState } from "react";
 import { Expense } from "@/store/ExpenseStore";
 import Modal from "@/layout/modal";
+import ParticipantDetails from "../../expensesContainer/ParticipantDetails";
 
 type ExpensesMobileProps = {
   groupId: string;
@@ -80,10 +81,7 @@ export default function ExpensesCommentsDiplayMobile({ groupId }: ExpensesMobile
         closeModal={handleModalToggle}
         title={`${selectedExpense?.title} - Details`}
       >
-        <section className="border-b dark:border-gray-400 py-2 mb-3"></section>
-        <section>
-          <h2>Participants ({selectedExpense?.participants?.length})</h2>
-        </section>
+        <ParticipantDetails expenseId={selectedExpense?.id || ""} userId="" />
       </Modal>
     </>
   )
