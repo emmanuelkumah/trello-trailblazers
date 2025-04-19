@@ -1,6 +1,10 @@
+import Image from '@/components/Image';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className='py-16 bg-[#FFE8E8]'>
       <div className='container mx-auto px-4'>
@@ -17,7 +21,10 @@ const HeroSection = () => {
               splitting for trips, dinners, and any shared expenses.
             </p>
             <div className='flex items-center'>
-              <Button className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full px-6'>
+              <Button
+                className='bg-[#FF8E8E] hover:bg-light-red text-white rounded-full px-6'
+                onClick={() => navigate("/auth")}
+              >
                 Get Started
               </Button>
               <Button
@@ -30,9 +37,11 @@ const HeroSection = () => {
           </div>
         </div>
         <div className='mt-8'>
-          <img
+          <Image
             src='/src/assets/img/hero-image.jpeg'
             alt='Two people looking at a tablet'
+            width={0}
+            height={0}
             className='rounded-lg shadow-md w-full h-auto'
           />
         </div>
