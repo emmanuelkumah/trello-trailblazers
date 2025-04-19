@@ -16,7 +16,7 @@ const Navbar = () => {
     <header className='bg-[#FFE8E8] py-4'>
       <div className='container mx-auto px-4'>
         <div className='flex justify-between items-center'>
-          <div className='text-2xl font-bold'>Divvy</div>
+          <div className='text-2xl font-medium'>Divvy</div>
 
           {/* Desktop Navigation */}
           <nav className='hidden md:flex items-center space-x-8'>

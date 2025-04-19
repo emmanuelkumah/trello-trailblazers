@@ -1,22 +1,25 @@
+import secureAccountImage from '@/assets/img/secure-account.jpeg';
+
 const AccountFeature = () => {
   return (
-    <section className='py-16 bg-[#FFE8E8]'>
+    <section className='py-10 bg-[#FFE8E8]'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-8'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-start'>
-            <h2 className='text-2xl font-bold mb-3'>
+            <h2 className='text-4xl mb-2 font-normal'>
               Secure Your Account with Easy Signup and Hassle-Free Login
             </h2>
-            <p className='mb-4'>
-              Enjoy peace of mind with a straightforward signup process. Secure
-              your personal and payment information with our advanced encryption
-              and protection measures, ensuring a safe and seamless financial
-              experience.
+            <p className='mb-4 font-sarabun text-base'>
+              Divvy prioritizes your security with a straightforward signup
+              process. Create your account using your email and a password,
+              ensuring your information is safe. Once registered, logging in is
+              quick and easy, allowing you to access your groups and expenses
+              instantly.
             </p>
           </div>
           <div>
             <img
-              src='/src/assets/img/secure-account.jpeg'
+              src={secureAccountImage}
               alt='Person using the app on a phone'
               className='rounded-lg w-full h-auto'
             />
