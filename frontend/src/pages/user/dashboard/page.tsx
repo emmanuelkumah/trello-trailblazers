@@ -113,10 +113,11 @@ export default function Dashboard() {
         </header>
 
         <section
-          className={`w-full ${isTablet
-            ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
-            : "grid grid-cols-3 gap-6"
-            }`}
+          className={`w-full ${
+            isTablet
+              ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
+              : "grid grid-cols-3 gap-6"
+          }`}
         >
           {analytics.map((item, idx) => (
             <AnalyticsCard
@@ -183,10 +184,7 @@ export default function Dashboard() {
         show={openModal.create}
         onClose={handleCreateModalToggle}
       />
-      <JoinGroupModal
-        show={openModal.join}
-        onClose={handleJoinModalToggle}
-      />
+      <JoinGroupModal show={openModal.join} onClose={handleJoinModalToggle} />
     </>
   );
 }
