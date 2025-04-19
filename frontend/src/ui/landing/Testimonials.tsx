@@ -1,6 +1,6 @@
 const Testimonials = () => {
   return (
-    <section className='py-16 bg-[#FFE8E8]'>
+    <section className='py-16 bg-[#FFE8E8]' id="testimonials">
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'>
           {/* Left Column: Grey Box */}

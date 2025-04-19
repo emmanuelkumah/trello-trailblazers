@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface EditableFieldProps {
   label: string;
@@ -15,7 +16,7 @@ export function EditableField({
 }: EditableFieldProps) {
   return (
     <div className="space-y-2">
-      <label className="text-[13px] text-ash-black font-medium">{label}</label>
+      <Label className="font-medium">{label}</Label>
       {editable ? (
         <Input
           value={value}
@@ -23,7 +24,7 @@ export function EditableField({
           className="border border-gray-300 rounded-full p-2"
         />
       ) : (
-        <p className="font-medium text-ash-black text-base">{value}</p>
+        <p className="font-medium text-base">{value}</p>
       )}
     </div>
   );

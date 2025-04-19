@@ -37,7 +37,7 @@ const FeatureItem = ({ icon, title, description }: FeatureItemProps) => {
 
 const KeyFeatures = () => {
   return (
-    <section className='py-16 bg-white'>
+    <section className='py-16 bg-white' id='features'>
       <div className='container mx-auto px-4'>
         <p className='text-sm text-gray-900 mb-4 text-center font-medium'>
           Features

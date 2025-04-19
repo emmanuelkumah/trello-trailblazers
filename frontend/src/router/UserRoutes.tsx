@@ -8,6 +8,8 @@ import useDeviceSize from "@/hooks/useDeviceSize";
 import DesktopProfile from "@/pages/user/profile/desktop/profile";
 import MobileProfile from "@/pages/user/profile/mobile/profile";
 import ProfileLayout from "@/layout/profileLayout";
+import AllGroups from "@/pages/user/all-groups/page";
+import GroupDisplay from "@/pages/user/groups/[slug]/page";
 
 const UserRoutes = [
   {
@@ -27,6 +29,14 @@ const UserRoutes = [
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "all-groups",
+        element: <AllGroups />
+      },
+      {
+        path: "groups/:slug",
+        element: <GroupDisplay />
       },
       {
         path: "profile",
@@ -52,8 +62,8 @@ const UserRoutes = [
 
 // Component for conditional rendering based on screen size
 function ProfileWithDevice() {
-  const { isDesktop } = useDeviceSize();
-  return isDesktop ? <DesktopProfile /> : <MobileProfile />;
+  const { isMobile } = useDeviceSize();
+  return isMobile ? <MobileProfile /> : <DesktopProfile />;
 }
 
 export default UserRoutes;

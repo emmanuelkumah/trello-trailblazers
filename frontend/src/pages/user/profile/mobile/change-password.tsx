@@ -28,11 +28,11 @@ export default function ChangePasswordMobile() {
 
   const handleSubmit = () => {
     // Add your password change logic here
-    navigate(-1); // Go back to profile page
+    navigate(-1);
   };
 
   return (
-    <div className="bg-white p-6 min-h-screen rounded-lg shadow-sm max-w-md mx-auto">
+    <div className="bg-white dark:bg-ash-black w-full h-full p-6 rounded-lg shadow-sm mx-auto">
       <div className="flex items-center mb-6">
         <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
           <ArrowLeft className="h-5 w-5" />
@@ -76,7 +76,7 @@ export default function ChangePasswordMobile() {
 
         <Button
           className={`w-full rounded-full py-5 mt-6 ${
-            !isValid ? "bg-light-red" : "bg-[#FF6B6B] hover:bg-[#FF6B6B]/90"
+            !isValid ? "bg-light-red" : "bg-light-red hover:bg-light-red/90 dark:hover:bg-light-red/90"
           }`}
           disabled={!isValid}
           onClick={handleSubmit}

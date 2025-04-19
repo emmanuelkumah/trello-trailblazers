@@ -34,7 +34,7 @@ export default function EditProfileMobile() {
   };
 
   return (
-    <div className="bg-white p-6 min-h-screen rounded-lg shadow-sm max-w-md mx-auto">
+    <div className="bg-white dark:bg-ash-black w-full h-full p-6 rounded-lg shadow-sm mx-auto">
       <div className="flex items-center mb-6">
         <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
           <ArrowLeft className="h-5 w-5" />

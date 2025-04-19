@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Camera } from "lucide-react";
+import Image from "@/components/Image";
 
 export default function EditableImage({
   src,
@@ -20,7 +21,7 @@ export default function EditableImage({
 
   return (
     <div className="relative w-[128px] h-[128px]">
-      <img
+      <Image
         src={src}
         width={128}
         height={126}
@@ -33,7 +34,7 @@ export default function EditableImage({
           {/* Camera Icon */}
           <button
             type="button"
-            className="absolute -right-0.5 bottom-1 bg-floral rounded-full p-2 
+            className="absolute -right-0.5 bottom-1 bg-floral dark:bg-ash-black dark:border rounded-full p-2 
                          hover:bg-platinum/50 hover:text-floral
                         w-8 h-8 flex items-center justify-center z-20"
             onClick={handleClick}

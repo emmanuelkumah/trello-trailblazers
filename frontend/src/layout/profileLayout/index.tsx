@@ -7,10 +7,8 @@ interface ProfileLayoutProps {
 
 export default function ProfileLayout({ children }: ProfileLayoutProps) {
   return (
-    <div>
-      {/* Layout structure */}
-      {children} {/* This will render the passed children, if any */}
-      {/* The Outlet will render nested routes */}
+    <div className="w-full h-full">
+      {children}
       <Outlet />
     </div>
   );

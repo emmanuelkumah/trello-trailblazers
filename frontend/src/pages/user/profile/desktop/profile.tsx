@@ -6,6 +6,10 @@ import { Input } from "@/components/ui/input";
 import EditableImage from "@/ui/profile/editableImage/EditableImage";
 import { EditableField } from "@/ui/profile/editableFeild/EditableFeild";
 import NotificationItem from "@/ui/profile/notificationItem/page";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
+import { Label } from "@/components/ui/label";
 
 interface ProfileData {
   fullName: string;
@@ -17,6 +21,7 @@ interface ProfileData {
 }
 
 export default function ProfileComponent() {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState<ProfileData>({
     fullName: "Franklin",
@@ -32,7 +37,7 @@ export default function ProfileComponent() {
       const imageUrl = URL.createObjectURL(file);
       setProfileData((prev) => ({ ...prev, profileImage: imageUrl }));
     } catch (error) {
-      console.error("Image upload failed:", error);
+      toast.error(`Image upload failed:, ${error}`);
     }
   };
 
@@ -42,33 +47,35 @@ export default function ProfileComponent() {
 
   const handleSave = async () => {
     try {
-      console.log("Saving:", profileData);
+      toast.info("Saving...");
       await new Promise((resolve) => setTimeout(resolve, 500));
       setIsEditing(false);
     } catch (error) {
-      console.error("Update failed:", error);
+      toast.error(`Update failed:, ${error}`);
     }
   };
 
   return (
-    <div className="hidden min-h-screen container mx-auto p-4 md:block">
-      <div className="flex justify-between mb-8">
+    <div className="hidden w-full h-full container mx-auto p-4 md:block ">
+      <div className="w-full h-full flex justify-between mb-8 gap-6">
         {/* Left section */}
-        <section className="mx-auto px-4 pb-4 w-full rounded-lg">
-          <div className="bg-white flex items-center justify-between p-4 rounded-t-lg">
+        <section className="mx-auto px-4 pb-4 w-full bg-white dark:bg-ash-black rounded-lg">
+          <div className="w-full flex items-center justify-between p-4 rounded-t-lg">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <Button
+                variant="ghost" size="icon" className="rounded-full"
+                onClick={() => navigate("/user")}
+              >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <h1 className="text-2xl font-bold">Franklin's Profile</h1>
             </div>
 
             <Button
-              className={`rounded-full ${
-                isEditing
-                  ? "bg-sunglow hover:bg-sunglow/50"
-                  : "bg-light-red hover:bg-light-red/50"
-              }`}
+              className={`rounded-full ${isEditing
+                ? "bg-sunglow hover:bg-sunglow/50"
+                : "bg-light-red hover:bg-light-red/50"
+                }`}
               onClick={() => (isEditing ? handleSave() : setIsEditing(true))}
             >
               {isEditing ? (
@@ -85,7 +92,7 @@ export default function ProfileComponent() {
             </Button>
           </div>
 
-          <div className="bg-white p-4 rounded-b-lg flex gap-8">
+          <div className="p-4 rounded-b-lg flex gap-8">
             <div className="flex-1 space-y-6">
               <div className="flex justify-between gap-8 items-center mb-8">
                 <EditableImage
@@ -94,7 +101,7 @@ export default function ProfileComponent() {
                   onChange={handleImageUpload}
                 />
 
-                <div className="w-full grid grid-cols-3 gap-y-8">
+                <div className="w-full grid grid-cols-3 gap-x-2 gap-y-8">
                   <EditableField
                     label="Full name"
                     value={profileData.fullName}
@@ -117,29 +124,30 @@ export default function ProfileComponent() {
                 <h2 className="text-xl font-semibold">Change Password</h2>
                 <div className="grid grid-cols-2 gap-x-8 gap-y-5">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none">
+                    <Label className="font-medium leading-none">
                       Current Password
-                    </label>
+                    </Label>
                     <Input type="password" placeholder="******************" />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none">
+                    <Label className="font-medium leading-none">
                       New Password
-                    </label>
+                    </Label>
                     <Input type="password" placeholder="******************" />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium leading-none">
+                    <Label className="font-medium leading-none">
                       Confirm New Password
-                    </label>
+                    </Label>
                     <Input type="password" placeholder="******************" />
                   </div>
 
                   <div className="space-y-2 self-end">
-                    <Button className="max-w-52 h-12 bg-light-red hover:bg-light-red/50 rounded-full">
+                    <Button className="w-64 h-12 bg-light-red hover:bg-light-red/50 rounded-full">
                       Update Password
+                      <Icon icon="mingcute:edit-line" width={18} height={18} />
                     </Button>
                   </div>
                 </div>
@@ -149,8 +157,8 @@ export default function ProfileComponent() {
         </section>
 
         {/* Right section */}
-        <section className="w-80">
-          <div className="bg-white space-y-4 p-4 rounded-lg">
+        <section className="w-full max-w-96">
+          <div className="bg-white dark:bg-ash-black space-y-4 p-4 rounded-lg">
             <h2 className="text-xl font-semibold">Notifications</h2>
             <div className="space-y-4">
               <NotificationItem
@@ -186,8 +194,8 @@ type ProfileFieldProps = {
 function ProfileField({ label, value }: ProfileFieldProps) {
   return (
     <div className="space-y-1">
-      <p className="text-sm text-gray-900 dark:text-white">{label}</p>
-      <p className="font-medium text-gray-900">{value}</p>
+      <p className="text-gray-900 dark:text-white">{label}</p>
+      <p className="font-medium text-gray-900 dark:text-platinum">{value}</p>
     </div>
   );
 }
