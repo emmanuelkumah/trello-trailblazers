@@ -5,7 +5,7 @@ import TopNav from "./TopNav";
 
 export default function UserLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <Container className="relative flex flex-col">
+    <Container className="relative flex flex-col font-manrope">
       <TopNav />
       <main className="w-full h-full overflow-hidden flex bg-floral dark:bg-black mt-18">
         <div role="presentation" className="relative w-full max-w-7xl h-full mx-auto pt-8 pb-4 overflow-x-hidden px-4 lg:px-6 2xl:px-0">

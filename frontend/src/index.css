@@ -207,12 +207,44 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope-Regular.ttf") format("truetype");
+  font-weight: 300 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
 .font-sarabun {
   font-family: 'Sarabun', sans-serif;
 }
 
 .font-teachers {
   font-family: 'Teachers', sans-serif;
+}
+
+.font-manrope {
+  font-family: 'Manrope', sans-serif;
 }
 
 :root {
@@ -296,6 +328,7 @@
   --color-emerald: #62D2A2;
   --color-ash-black: #2D2D2D;
   --color-platinum: #EAEAEA;
+  --font-marope: "Manrope", sans-serif;
 }
 
 @theme inline {
