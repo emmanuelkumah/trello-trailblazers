@@ -4,13 +4,34 @@ import { GroupCardType } from "@/types";
 import { Icon } from "@iconify/react";
 import CreateExpense from "../createExpense";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+interface GroupCardProps extends GroupCardType {
+  slug: string;
+  id: string;
+  code: string;
+}
 
-export default function GroupCard({ image, title, description, members, total, content }: GroupCardType) {
+export default function GroupCard({ 
+  image, 
+  title, 
+  description, 
+  members, 
+  total, 
+  content,
+  slug,
+  id,
+  code
+}: GroupCardProps) {
   const [show, setShow] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleShowToggle = () => {
     setShow(prev => !prev);
+  };
+
+  const handleViewGroup = () => {
+    navigate(`/user/groups/${slug}?code=${code}`);
   };
 
   return (
@@ -73,7 +94,12 @@ export default function GroupCard({ image, title, description, members, total, c
             </div>
 
             <div className="w-max ml-auto flex items-center gap-3">
-              <Button variant="default" size="lg" className="bg-light-red flex items-center gap-3 rounded-full">
+              <Button 
+                variant="default" 
+                size="lg" 
+                className="bg-light-red flex items-center gap-3 rounded-full"
+                onClick={handleViewGroup}
+              >
                 View Group
                 <Icon icon="lucide:view" width={24} height={24} />
               </Button>
@@ -94,6 +120,7 @@ export default function GroupCard({ image, title, description, members, total, c
       <CreateExpense
         show={show}
         onClose={handleShowToggle}
+        groupId={id}
       />
     </>
   )
