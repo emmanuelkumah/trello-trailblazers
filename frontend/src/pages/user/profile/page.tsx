@@ -1,7 +1,15 @@
+import useDeviceSize from "@/hooks/useDeviceSize";
+import DesktopProfile from "./desktop/profile";
+import MobileProfile from "./mobile/profile";
+import ProfileLayout from "@/layout/profileLayout";
 
+export default function Profile() {
+  const { isMobile } = useDeviceSize();
+  // const { isDesktop } = useDeviceSize();
 
-export default function ProfilePage() {
   return (
-    <div>ProfilePage</div>
-  )
+    <ProfileLayout>
+      {isMobile ? <MobileProfile /> : <DesktopProfile />}
+    </ProfileLayout>
+  );
 }

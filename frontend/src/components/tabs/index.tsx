@@ -12,12 +12,16 @@ interface TabsProps {
   position?: "left" | "center" | "right";
   tabs: Tab[];
   activateParams?: boolean;
+  onTabChange?: (index: number) => void;
+  activeIndex?: number;
 }
 
 const Tabs: React.FC<TabsProps> = ({
   tabs,
   position = "center",
   activateParams = false,
+  onTabChange,
+  activeIndex,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,9 +34,13 @@ const Tabs: React.FC<TabsProps> = ({
     ? tabs.findIndex((tab) => getFormattedLabel(tab.label) === initialTabLabel)
     : 0;
 
-  const [activeTab, setActiveTab] = useState(
+  // Use the activeIndex prop if provided, otherwise use internal state
+  const [internalActiveTab, setInternalActiveTab] = useState(
     initialActiveTab !== -1 ? initialActiveTab : 0
   );
+  
+  // Determine which activeTab to use
+  const activeTab = activeIndex !== undefined ? activeIndex : internalActiveTab;
 
   useEffect(() => {
     if (activateParams) {
@@ -45,7 +53,15 @@ const Tabs: React.FC<TabsProps> = ({
   const handleTabClick = (index: number) => {
     if (tabs[index].inActive === true)
       return toast.warning("Hang tight! This feature is coming soon.");
-    setActiveTab(index);
+    
+    // If we have an external controller, use the callback
+    if (onTabChange) {
+      onTabChange(index);
+    } else {
+      // Otherwise use internal state
+      setInternalActiveTab(index);
+    }
+    
     if (activateParams) {
       const newSearchParams = new URLSearchParams(searchParams.toString());
       newSearchParams.set("tab", getFormattedLabel(tabs[index].label));
