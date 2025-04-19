@@ -1,4 +1,7 @@
+import { useTheme } from "@/providers/themeContext";
+import { Icon } from "@iconify/react";
 import type React from "react";
+import Image from "../Image";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -11,35 +14,38 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   title,
   subtitle,
 }) => {
+  const { theme, setTheme } = useTheme();
+  
+  const handleToggle = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <main className="flex items-center justify-center min-h-screen bg-[#FFF8F0] dark:bg-[#1E1E1E]">
+    <main className="flex items-center justify-center w-full h-screen bg-floral dark:bg-ash-black">
       {/* Left side - Form */}
-      <section className="w-full max-w-7xl mx-auto md flex overflow-hidden gap-6 p-6">
-        <div className="w-full md:w-1/2 max-w-lg md:max-w-full mx-auto flex items-center justify-center bg-white dark:bg-[#0F0F0F] rounded-4xl shadow-md">
-          <div className="w-full max-w-md h-[75vh] py-8">{children}</div>
+      <section className="w-full h-full mx-auto md flex overflow-hidden gap-6 p-6">
+        <div className="w-full md:w-1/2 max-w-lg md:max-w-full mx-auto flex items-center justify-center bg-white dark:bg-black rounded-4xl shadow-md">
+          <div className="w-full max-w-md h-full py-8">{children}</div>
         </div>
 
         {/* Right side - Colorful background with message */}
         <div className="hidden md:block md:w-1/2 bg-black relative overflow-hidden rounded-4xl">
           {/* Colorful abstract shapes */}
           <div className="absolute inset-0 overflow-hidden">
-            <img
+            <Image
               src="/images/auth/auth_bg.svg"
               alt="colorful pattern"
+              width={0}
+              height={0}
               className="w-full h-full object-cover"
             />
           </div>
 
           {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col justify-center p-12 text-white z-10 bg-black/50 backdrop-blur-lg">
-            <h2 className="text-4xl font-bold mb-4">{title}</h2>
-            <p className="text-lg">{subtitle}</p>
-            {/* Decorative dot */}
-            <div className="absolute bottom-8 left-8 flex opacity-60 hover:opacity-100 cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-[#220066]" />
-              <div className="w-6 h-6 rounded-full bg-[#320194] -ml-[18px] -translate-y-[1px]" />
-              <div className="w-6 h-6 rounded-full bg-[#220066] -ml-[18px] -translate-y-[2px]" />
-            </div>
+          <div className="absolute top-0 left-0 w-full h-full inset-0 flex flex-col justify-center p-12 text-white z-10 bg-black/50 ">
+            <h1 className="text-6xl font-bold mt-auto">{title}</h1>
+            <p className="text-lg mb-12">{subtitle}</p>
+            <Icon role="button" icon={theme === "dark" ? "noto-v1:sun" : "logos:moon"} width={32} height={32} onClick={handleToggle} className="cursor-pointer" />
           </div>
         </div>
       </section>
