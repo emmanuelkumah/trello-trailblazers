@@ -28,12 +28,18 @@ export default function JoinGroupModal({ show, onClose }: ReuseModalTypes) {
         </span>
 
         <section className="w-full grid grid-cols-2 gap-4">
-          <Button variant="default" size="lg" className="w-full bg-gray-400 flex gap-3 rounded-full">
+          <Button
+            type="button"
+            variant="default"
+            size="lg"
+            className="w-full bg-gray-400 flex gap-3 rounded-full"
+            onClick={onClose}
+          >
             Cancel
             <Icon icon="tabler:cancel" width={24} height={24} />
           </Button>
 
-          <Button variant="default" size="lg" className="w-full bg-mustard flex gap-3 rounded-full">
+          <Button type="button" variant="default" size="lg" className="w-full bg-mustard flex gap-3 rounded-full">
             Join Group
             <Icon icon="mdi:users-add-outline" width={24} height={24} />
           </Button>

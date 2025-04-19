@@ -54,7 +54,7 @@ export default function DefaultExpencesDisplayContainer({ data, title, mode, par
 
         <section className="w-full h-full flex flex-row">
           <CommentsDisplay />
-          <ParticipantDetails />
+          <ParticipantDetails expenseId={data?.id} userId="current-user" />
         </section>
 
       </div>

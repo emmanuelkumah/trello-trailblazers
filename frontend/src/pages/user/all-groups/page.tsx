@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDivvyGroupStore } from "@/store/GroupStore";
 import { useExpenseStore } from "@/store/ExpenseStore";
 import { ContentType } from "@/types";
+import ActionsModal from "@/ui/user/mobile/actionsModal";
 
 export default function AllGroups() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function AllGroups() {
     create: false,
     join: false
   });
-  
+
   // Get groups from store
   const { data: groups } = useDivvyGroupStore();
   const { getExpensesByGroupId } = useExpenseStore();
@@ -35,10 +36,10 @@ export default function AllGroups() {
   // Process expenses for each group
   const getGroupExpensesInfo = (groupId: string) => {
     const expenses = getExpensesByGroupId(groupId);
-    
+
     // Get total amount from all expenses
     const totalAmount = expenses.reduce((total, expense) => total + expense.amount, 0);
-    
+
     // Get unique participants count
     const participantIds = new Set();
     expenses.forEach(expense => {
@@ -46,7 +47,7 @@ export default function AllGroups() {
         participantIds.add(participant.id);
       });
     });
-    
+
     // Format recent expenses for display
     const recentExpenses = expenses.slice(0, 5).map(expense => {
       // Map expense status to ContentType status
@@ -56,19 +57,19 @@ export default function AllGroups() {
       } else {
         status = "ongoing";
       }
-      
+
       return {
         id: expense.id,
         title: expense.title,
         price: expense.amount,
         status: status,
         members: expense.participants.length,
-        action: expense.participants.every(p => p.hasPaid) 
+        action: expense.participants.every(p => p.hasPaid)
           ? "contributed" as const
           : "pending contribution" as const
       };
     });
-    
+
     return {
       total: totalAmount,
       members: participantIds.size || 0,
@@ -112,7 +113,7 @@ export default function AllGroups() {
             </Button>
           </aside>
         </header>
-        
+
         {groups.length > 0 ? (
           <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4 lg:gap-0">
             {groups.map((group) => {
@@ -168,6 +169,7 @@ export default function AllGroups() {
         show={openModal.join}
         onClose={handleJoinModalToggle}
       />
+      <ActionsModal />
     </>
   );
 }
