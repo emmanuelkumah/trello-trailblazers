@@ -102,7 +102,19 @@ const useAuthStore = create<AuthState>()(
         }
       },
 
-      logout: () => {
+      logout: async () => {
+        try {
+          set({ isLoading: true, error: null });
+          await axios.post("http://localhost:5000/api/auth/logout");
+
+          localStorage.setItem("user", JSON.stringify(null));
+          set({ user: null, isAuthenticated: true, isLoading: false });
+        } catch (error) {
+          set({
+            error: error instanceof Error ? error.message : "An error occurred",
+            isLoading: false,
+          });
+        }
         set({ user: null, isAuthenticated: false });
       },
 
@@ -171,7 +183,7 @@ const useAuthStore = create<AuthState>()(
       clearError: () => set({ error: null }),
     }),
     {
-      name: "auth-storage",
+      name: "divvy-auth-storage",
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,

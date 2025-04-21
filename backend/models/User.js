@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   phone_number: { type: String, required: [true, "Please add a phone number"] },
   country: { type: String, required: [true, "Please add a country"] },
   state: { type: String, required: [true, "Please add a state"] },
+  groups: [{ type: mongoose.Schema.Types.ObjectId, ref: "Groups" }],
 });
 
 module.exports = mongoose.model("User", UserSchema);
