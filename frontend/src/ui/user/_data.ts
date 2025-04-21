@@ -199,6 +199,52 @@ export const groupCardData: GroupCardType[] = [
         members: 3,
         action: 'contributed',
       },
-    ],
+    ]
+  }
+];
+
+export const groupActions = [
+  {
+    id: 1,
+    label: "Manage Members",
+    icon: "grommet-icons:user-settings"
+  },
+  {
+    id: 2,
+    label: "Copy Group Code",
+    icon: "lucide-lab:copy-code"
+  },
+  {
+    id: 3,
+    label: "Copy Group Link",
+    icon: "hugeicons:copy-link"
+  },
+  {
+    id: 4,
+    label: "Delete Group",
+    icon: "hugeicons:delete-04"
+  },
+]
+
+export const participants = [
+  {
+    id: "p1",
+    name: "Alex Johnson",
+    email: "alex.j@example.com",
+  },
+  {
+    id: "p2",
+    name: "Morgan Smith",
+    email: "morgan.s@example.com",
+  },
+  {
+    id: "p3",
+    name: "Taylor Williams",
+    email: "taylor.w@example.com",
+  },
+  {
+    id: "p4",
+    name: "Jordan Lee",
+    email: "jordan.l@example.com",
   },
 ];

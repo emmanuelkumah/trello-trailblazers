@@ -1,7 +1,11 @@
+import Image from '@/components/Image';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import heroImage from '@/assets/img/hero-image.jpeg';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className='py-14 bg-[#FFE8E8] text-black'>
       <div className='container mx-auto px-4'>
@@ -20,7 +24,8 @@ const HeroSection = () => {
             </p>
             <div className='flex items-center'>
               <Button
-                className='bg-[#FF8E8E] hover:bg-[#FF7070] text-white rounded-full px-6 font-sarabun cursor-pointer transition-colors duration-200'
+                className='bg-[#FF8E8E] hover:bg-light-red text-white rounded-full px-6'
+                onClick={() => navigate("/auth")}
               >
                 Get Started
               </Button>
@@ -34,9 +39,11 @@ const HeroSection = () => {
           </div>
         </div>
         <div className='mt-8'>
-          <img
+          <Image
             src={heroImage}
             alt='Two people looking at a tablet'
+            width={0}
+            height={0}
             className='rounded-lg shadow-md w-full h-auto'
           />
         </div>
