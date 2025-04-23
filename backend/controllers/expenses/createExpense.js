@@ -2,7 +2,14 @@ const Expense = require("../../models/Expense");
 const Group = require("../../models/Group");
 
 const createExpense = async (req, res) => {
-  const { title, totalAmount, splitMethod, participants, status } = req.body;
+  const {
+    title,
+    totalAmount,
+    splitMethod,
+    participants,
+    status,
+    comments = [],
+  } = req.body;
   const creatorId = req.user;
   const groupId = req.params.groupId;
 
@@ -55,6 +62,7 @@ const createExpense = async (req, res) => {
       groupId: groupId,
       participants: participants,
       status: status,
+      comments: comments,
     });
 
     // Add the expense to the group
@@ -69,8 +77,9 @@ const createExpense = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Error creating expense:", error);
-    res.status(500).json({ message: "Server error" });
+    res
+      .status(500)
+      .json({ status: "fail", message: error.message || "Server error" });
   }
 };
 

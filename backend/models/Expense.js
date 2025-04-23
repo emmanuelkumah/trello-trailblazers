@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ExpenseComment = require("./ExpenseComment");
 
 const ExpenseSchema = new mongoose.Schema({
   creator: {
@@ -32,13 +33,7 @@ const ExpenseSchema = new mongoose.Schema({
       amountOwed: { type: Number, default: 0 },
     },
   ],
-  comments: [
-    {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      comment: { type: String },
-      createdAt: { type: Date, default: Date.now() },
-    },
-  ],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "ExpenseComment" }],
   groupId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Group",
