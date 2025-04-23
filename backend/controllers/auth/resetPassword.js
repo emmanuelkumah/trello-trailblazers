@@ -1,6 +1,6 @@
 const bycrypt = require("bcryptjs");
 const User = require("../../models/User");
-// const OTP = require("../../models/OTP");
+const OTP = require("../../models/OTP");
 
 const resetPassword = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
@@ -14,6 +14,15 @@ const resetPassword = async (req, res) => {
   }
 
   try {
+    const otpRecord = await OTP.findOne({ email });
+
+    if (otpRecord) {
+      // This means the user has not verified their OTP, because the OTP record still exists
+      return res.status(403).json({
+        message: "You need to verify your OTP before resetting your password",
+      });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -26,6 +35,10 @@ const resetPassword = async (req, res) => {
     const hashedPassword = await bycrypt.hash(password, saltRounds);
     user.password = hashedPassword;
     await user.save();
+
+    // Delete the OTP record after successful password reset
+    await OTP.deleteOne({ email });
+
     res
       .status(200)
       .json({ message: "Password reset successfully. Login again!" });

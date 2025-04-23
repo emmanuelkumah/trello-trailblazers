@@ -3,7 +3,9 @@ const { sanitizeDoc } = require("../../lib/helpers");
 
 const getAllGroups = async (req, res) => {
   try {
-    const groups = await Group.find({}).populate("members", "fullname email");
+    const groups = await Group.find({})
+      .populate("expenses", "title totalAmount splitMethod participants status")
+      .populate("members", "fullname email");
 
     if (!groups || groups.length === 0) {
       return res.status(404).json({

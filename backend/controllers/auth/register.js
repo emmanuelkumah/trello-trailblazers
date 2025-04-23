@@ -6,7 +6,10 @@ const register = async (req, res) => {
   try {
     const { fullname, phone_number, country, state, email, password } =
       req.body;
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email }).populate(
+      "groups",
+      "name description image"
+    );
 
     if (user) return res.status(400).json({ message: "User already exists" });
 
