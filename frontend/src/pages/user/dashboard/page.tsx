@@ -14,7 +14,7 @@ import { useExpenseStore } from "@/store/ExpenseStore";
 import { ContentType } from "@/types";
 
 export default function Dashboard() {
-  let user = "Franklin";
+  const user = "Franklin";
   const navigate = useNavigate();
   const isTablet = useDeviceSize();
   const { data: groups } = useDivvyGroupStore();
@@ -22,7 +22,7 @@ export default function Dashboard() {
 
   const [openModal, setModalOpen] = useState({
     create: false,
-    join: false
+    join: false,
   });
 
   const handleCreateModalToggle = () => {
@@ -42,18 +42,21 @@ export default function Dashboard() {
     const expenses = getExpensesByGroupId(groupId);
 
     // Get total amount from all expenses
-    const totalAmount = expenses.reduce((total, expense) => total + expense.amount, 0);
+    const totalAmount = expenses.reduce(
+      (total, expense) => total + expense.amount,
+      0
+    );
 
     // Get unique participants count
     const participantIds = new Set();
-    expenses.forEach(expense => {
-      expense.participants.forEach(participant => {
+    expenses.forEach((expense) => {
+      expense.participants.forEach((participant) => {
         participantIds.add(participant.id);
       });
     });
 
     // Format recent expenses for display
-    const recentExpenses = expenses.slice(0, 5).map(expense => {
+    const recentExpenses = expenses.slice(0, 5).map((expense) => {
       // Map expense status to ContentType status
       let status: "ongoing" | "ended";
       if (expense.status === "completed") {
@@ -68,16 +71,16 @@ export default function Dashboard() {
         price: expense.amount,
         status: status,
         members: expense.participants.length,
-        action: expense.participants.every(p => p.hasPaid)
-          ? "contributed" as const
-          : "pending contribution" as const
+        action: expense.participants.every((p) => p.hasPaid)
+          ? ("contributed" as const)
+          : ("pending contribution" as const),
       };
     });
 
     return {
       total: totalAmount,
       members: participantIds.size || 0,
-      content: recentExpenses as ContentType[]
+      content: recentExpenses as ContentType[],
     };
   };
 
@@ -145,7 +148,9 @@ export default function Dashboard() {
 
           <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4 lg:gap-0">
             {groups.slice(0, 3).map((group) => {
-              const { total, members, content } = getGroupExpensesInfo(group.id);
+              const { total, members, content } = getGroupExpensesInfo(
+                group.id
+              );
               return (
                 <GroupCard
                   key={group.id}

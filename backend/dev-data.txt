@@ -1,0 +1,28 @@
+const users = [
+  {
+    //logged-in
+    "fullname": "Ayo Balogun",
+    "email": "ayobalogun@example.com",
+    "password": "password",
+    "phone_number": "+2348012345678",
+    "country": "Nigeria",
+    "state": "Lagos"
+  },
+  {
+    "fullname": "Zara Ahmed",
+    "email": "zaraahmed@example.com",
+    "password": "password",
+    "phone_number": "+2348098765432",
+    "country": "Nigeria",
+    "state": "Abuja"
+  },
+  {
+    //logged-in
+    "fullname": "Daniel Effiong",
+    "email": "danieleffiong@example.com",
+    "password": "password",
+    "phone_number": "+2348054321987",
+    "country": "Nigeria",
+    "state": "Port Harcourt"
+  }
+];
