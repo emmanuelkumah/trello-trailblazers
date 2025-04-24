@@ -9,7 +9,6 @@ const requestResetOTP = async (req, res) => {
     if (!email) return res.status(400).json({ error: "Email is required" });
 
     const user = await User.findOne({ email });
-    console.log(user?.fullname);
     if (!user) return res.status(404).json({ error: "User not found" });
 
     // Invalidate previous OTPs
