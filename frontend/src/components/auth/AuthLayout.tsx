@@ -15,7 +15,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
   subtitle,
 }) => {
   const { theme, setTheme } = useTheme();
-  
+
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -45,7 +45,14 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
           <div className="absolute top-0 left-0 w-full h-full inset-0 flex flex-col justify-center p-12 text-white z-10 bg-black/50 ">
             <h1 className="text-6xl font-bold mt-auto">{title}</h1>
             <p className="text-lg mb-12">{subtitle}</p>
-            <Icon role="button" icon={theme === "dark" ? "noto-v1:sun" : "logos:moon"} width={32} height={32} onClick={handleToggle} className="cursor-pointer" />
+            <Icon
+              role="button"
+              icon={theme === "dark" ? "noto-v1:sun" : "logos:moon"}
+              width={32}
+              height={32}
+              onClick={handleToggle}
+              className="cursor-pointer"
+            />
           </div>
         </div>
       </section>

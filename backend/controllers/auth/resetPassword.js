@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const User = require("../../models/User");
 const OTP = require("../../models/OTP");
 
 const resetPassword = async (req, res) => {
@@ -31,7 +32,7 @@ const resetPassword = async (req, res) => {
     // if (checkOTP)
 
     const saltRounds = 10;
-    const hashedPassword = await bycrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
     user.password = hashedPassword;
     await user.save();
 
