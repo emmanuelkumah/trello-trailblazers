@@ -22,18 +22,21 @@ import {
 } from "@/components/ui/form";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 // Mock data for dropdowns
 
 const RegisterForm: React.FC = () => {
   const {
     register: registerUser,
+    login: loginUser,
     isLoading,
     error,
     clearError,
   } = useAuthStore();
   const [selectedCountry, setSelectedCountry] = useState("");
   const [states, setStates] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   const {
     data: countries,
@@ -62,12 +65,10 @@ const RegisterForm: React.FC = () => {
 
   const onSubmit = async (data: RegisterFormValues) => {
     clearError();
-    // Remove confirmPassword before sending to API
-    console.log(data);
     const { confirmPassword, ...userData } = data;
-    console.log(confirmPassword);
-
+    
     await registerUser(userData);
+    navigate("/user");
   };
 
   const handleCountryChange = async (value: string) => {

@@ -1,30 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import useDeviceSize from '@/hooks/useDeviceSize';
-import { analytics } from '@/ui/user/_data';
-import AnalyticsCard from '@/ui/user/analyticsCard';
-import CreateGroupModal from '@/ui/user/createGroupModal';
-import GroupCard from '@/ui/user/groupCard';
-import JoinGroupModal from '@/ui/user/joinGroupModal';
-import { Icon } from '@iconify/react';
-import ActionsModal from '@/ui/user/mobile/actionsModal';
-import { useDivvyGroupStore } from '@/store/GroupStore';
-import { useExpenseStore } from '@/store/ExpenseStore';
-import useAuthStore from '@/store/useAuthStore';
-import { ContentType } from '@/types';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import useDeviceSize from "@/hooks/useDeviceSize";
+import { analytics } from "@/ui/user/_data";
+import AnalyticsCard from "@/ui/user/analyticsCard";
+import CreateGroupModal from "@/ui/user/createGroupModal";
+import GroupCard from "@/ui/user/groupCard";
+import JoinGroupModal from "@/ui/user/joinGroupModal";
+import { Icon } from "@iconify/react";
+import ActionsModal from "@/ui/user/mobile/actionsModal";
+import { useDivvyGroupStore } from "@/store/GroupStore";
+import { useExpenseStore } from "@/store/ExpenseStore";
+import { ContentType } from "@/types";
+import useAuthStore from "@/store/useAuthStore";
 
 export default function Dashboard() {
+  const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const isTablet = useDeviceSize();
   const { data: groups } = useDivvyGroupStore();
   const { getExpensesByGroupId } = useExpenseStore();
 
-  // Get authenticated user from the auth store
-  const { user, isAuthenticated } = useAuthStore();
-
-  // Extract user's first name for greeting
-  const userName = user?.fullName ? user.fullName.split(' ')[0] : 'there';
+  const user_name = user?.fullName;
 
   const [openModal, setModalOpen] = useState({
     create: false,
@@ -101,7 +98,7 @@ export default function Dashboard() {
       <main className='w-full flex flex-col gap-6'>
         <header className='w-full flex items-center justify-between'>
           <aside>
-            <h1>Hello {userName},</h1>
+            <h1>Hello {user_name},</h1>
             <p>Let's get you up to speed</p>
           </aside>
 
@@ -128,11 +125,10 @@ export default function Dashboard() {
         </header>
 
         <section
-          className={`w-full ${
-            isTablet
-              ? 'flex overflow-x-auto gap-4 scrollbar-hide pb-2'
-              : 'grid grid-cols-3 gap-6'
-          }`}
+          className={`w-full ${isTablet
+              ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
+              : "grid grid-cols-3 gap-6"
+            }`}
         >
           {analytics.map((item, idx) => (
             <AnalyticsCard
