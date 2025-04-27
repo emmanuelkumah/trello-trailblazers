@@ -18,9 +18,7 @@ interface AuthState {
   error: string | null;
 
   login: (email: string, password: string) => Promise<void>;
-  register: (
-    userData: Omit<User, "id"> & { password: string }
-  ) => Promise<void>;
+  register: (userData: Omit<User, "id"> & { password: string }) => Promise<void>;
   logout: () => void;
   resetPassword: (email: string) => Promise<void>;
   verifyOTP: (email: string, otp: string) => Promise<boolean>;
@@ -37,30 +35,30 @@ const useAuthStore = create<AuthState>()(
       isLoading: false,
       error: null,
 
-      // In a real app, these would make API calls
       login: async (email: string, password: string) => {
         if (!email || !password) return;
         try {
           set({ isLoading: true, error: null });
-          const res = await axios.post("http://localhost:5000/api/auth/login", {
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/login", {
             email,
             password,
           });
+          
           if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
-
+          
           const user: User = {
             id: res.data.id,
-            fullName: res.data.fullName,
+            fullName: res.data.fullName || res.data.fullname,
             email: res.data.email,
-            phoneNumber: res.data.phoneNumber,
+            phoneNumber: res.data.phoneNumber || res.data.phone_number,
             country: res.data.country,
-            stateRegion: res.data.stateRegion,
+            stateRegion: res.data.stateRegion || res.data.state,
           };
-          localStorage.setItem("user", JSON.stringify(user));
+          
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred during login",
             isLoading: false,
           });
         }
@@ -72,7 +70,7 @@ const useAuthStore = create<AuthState>()(
           set({ isLoading: true, error: null });
 
           const res = await axios.post(
-            "http://localhost:5000/api/auth/register",
+            "https://trello-trailblazers-backend.onrender.com/api/auth/register",
             {
               fullname: userData.fullName,
               phone_number: userData.phoneNumber,
@@ -82,21 +80,22 @@ const useAuthStore = create<AuthState>()(
               password: userData.password,
             }
           );
+          
           if (!res.data) throw new Error(`${res.status} ${res.statusText}`);
 
           const user: User = {
-            id: res.data.id,
-            fullName: res.data.fullName,
-            email: res.data.email,
-            phoneNumber: res.data.phoneNumber,
-            country: res.data.country,
-            stateRegion: res.data.stateRegion,
+            id: res.data.id || res.data._id,
+            fullName: res.data.fullName || res.data.fullname || userData.fullName,
+            email: res.data.email || userData.email,
+            phoneNumber: res.data.phoneNumber || res.data.phone_number || userData.phoneNumber,
+            country: res.data.country || userData.country,
+            stateRegion: res.data.stateRegion || res.data.state || userData.stateRegion,
           };
-          localStorage.setItem("user", JSON.stringify(user));
+          
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred during registration",
             isLoading: false,
           });
         }
@@ -105,58 +104,57 @@ const useAuthStore = create<AuthState>()(
       logout: async () => {
         try {
           set({ isLoading: true, error: null });
-          await axios.post("http://localhost:5000/api/auth/logout");
-
-          localStorage.setItem("user", JSON.stringify(null));
-          set({ user: null, isAuthenticated: true, isLoading: false });
+          await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/logout");
+          set({ user: null, isAuthenticated: false, isLoading: false });
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred during logout",
             isLoading: false,
           });
+          // Still logout the user locally even if API call fails
+          set({ user: null, isAuthenticated: false });
         }
-        set({ user: null, isAuthenticated: false });
       },
 
       resetPassword: async (email: string) => {
         try {
           set({ isLoading: true, error: null });
-
-          // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-
-          // For demo purposes, we'll just check if the email contains "error"
-          if (email.includes("error")) {
-            throw new Error("Email not found");
+          
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/reset-password", {
+            email
+          });
+          
+          if (!res.data.success) {
+            throw new Error(res.data.message || "Password reset request failed");
           }
-
+          
           set({ isLoading: false });
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred during password reset",
             isLoading: false,
           });
         }
       },
 
       verifyOTP: async (email: string, otp: string) => {
-        console.log(email);
         try {
           set({ isLoading: true, error: null });
-
-          // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-
-          // For demo purposes, we'll just check if the OTP is "123456"
-          if (otp !== "123456") {
-            throw new Error("Invalid OTP");
+          
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/verify-otp", {
+            email,
+            otp
+          });
+          
+          if (!res.data.success) {
+            throw new Error(res.data.message || "Invalid OTP");
           }
-
+          
           set({ isLoading: false });
           return true;
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred during OTP verification",
             isLoading: false,
           });
           return false;
@@ -164,17 +162,22 @@ const useAuthStore = create<AuthState>()(
       },
 
       setNewPassword: async (email: string, password: string) => {
-        console.log(email, password);
         try {
           set({ isLoading: true, error: null });
-
-          // Simulate API call
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-
+          
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/set-password", {
+            email,
+            password
+          });
+          
+          if (!res.data.success) {
+            throw new Error(res.data.message || "Failed to set new password");
+          }
+          
           set({ isLoading: false });
         } catch (error) {
           set({
-            error: error instanceof Error ? error.message : "An error occurred",
+            error: error instanceof Error ? error.message : "An error occurred when setting new password",
             isLoading: false,
           });
         }

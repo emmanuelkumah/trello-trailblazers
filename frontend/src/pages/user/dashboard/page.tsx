@@ -1,24 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import useDeviceSize from "@/hooks/useDeviceSize";
-import { analytics } from "@/ui/user/_data";
-import AnalyticsCard from "@/ui/user/analyticsCard";
-import CreateGroupModal from "@/ui/user/createGroupModal";
-import GroupCard from "@/ui/user/groupCard";
-import JoinGroupModal from "@/ui/user/joinGroupModal";
-import { Icon } from "@iconify/react";
-import ActionsModal from "@/ui/user/mobile/actionsModal";
-import { useDivvyGroupStore } from "@/store/GroupStore";
-import { useExpenseStore } from "@/store/ExpenseStore";
-import { ContentType } from "@/types";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import useDeviceSize from '@/hooks/useDeviceSize';
+import { analytics } from '@/ui/user/_data';
+import AnalyticsCard from '@/ui/user/analyticsCard';
+import CreateGroupModal from '@/ui/user/createGroupModal';
+import GroupCard from '@/ui/user/groupCard';
+import JoinGroupModal from '@/ui/user/joinGroupModal';
+import { Icon } from '@iconify/react';
+import ActionsModal from '@/ui/user/mobile/actionsModal';
+import { useDivvyGroupStore } from '@/store/GroupStore';
+import { useExpenseStore } from '@/store/ExpenseStore';
+import useAuthStore from '@/store/useAuthStore';
+import { ContentType } from '@/types';
 
 export default function Dashboard() {
-  const user = "Franklin";
   const navigate = useNavigate();
   const isTablet = useDeviceSize();
   const { data: groups } = useDivvyGroupStore();
   const { getExpensesByGroupId } = useExpenseStore();
+
+  // Get authenticated user from the auth store
+  const { user, isAuthenticated } = useAuthStore();
+
+  // Extract user's first name for greeting
+  const userName = user?.fullName ? user.fullName.split(' ')[0] : 'there';
 
   const [openModal, setModalOpen] = useState({
     create: false,
@@ -34,7 +40,7 @@ export default function Dashboard() {
   };
 
   const navigateToGroups = () => {
-    navigate("/user/all-groups");
+    navigate('/user/all-groups');
   };
 
   // Process expenses for each group
@@ -58,11 +64,11 @@ export default function Dashboard() {
     // Format recent expenses for display
     const recentExpenses = expenses.slice(0, 5).map((expense) => {
       // Map expense status to ContentType status
-      let status: "ongoing" | "ended";
-      if (expense.status === "completed") {
-        status = "ended";
+      let status: 'ongoing' | 'ended';
+      if (expense.status === 'completed') {
+        status = 'ended';
       } else {
-        status = "ongoing";
+        status = 'ongoing';
       }
 
       return {
@@ -72,8 +78,8 @@ export default function Dashboard() {
         status: status,
         members: expense.participants.length,
         action: expense.participants.every((p) => p.hasPaid)
-          ? ("contributed" as const)
-          : ("pending contribution" as const),
+          ? ('contributed' as const)
+          : ('pending contribution' as const),
       };
     });
 
@@ -84,33 +90,39 @@ export default function Dashboard() {
     };
   };
 
+  // Redirect to login if not authenticated
+  if (!isAuthenticated || !user) {
+    navigate('/auth/login');
+    return null;
+  }
+
   return (
     <>
-      <main className="w-full flex flex-col gap-6">
-        <header className="w-full flex items-center justify-between">
+      <main className='w-full flex flex-col gap-6'>
+        <header className='w-full flex items-center justify-between'>
           <aside>
-            <h1>Hello {user},</h1>
+            <h1>Hello {userName},</h1>
             <p>Let's get you up to speed</p>
           </aside>
 
-          <aside className="hidden md:flex items-center gap-8">
+          <aside className='hidden md:flex items-center gap-8'>
             <Button
-              variant="default"
-              size="lg"
-              className="bg-light-red gap-4 rounded-full"
+              variant='default'
+              size='lg'
+              className='bg-light-red gap-4 rounded-full'
               onClick={handleJoinModalToggle}
             >
               Join Group
-              <Icon icon="fluent:cube-add-20-filled" width={24} />
+              <Icon icon='fluent:cube-add-20-filled' width={24} />
             </Button>
             <Button
-              variant="outline"
-              size="lg"
-              className="bg-transparent dark:bg-transparent border-light-red dark:border-light-red dark:text-light-red text-light-red rounded-full"
+              variant='outline'
+              size='lg'
+              className='bg-transparent dark:bg-transparent border-light-red dark:border-light-red dark:text-light-red text-light-red rounded-full'
               onClick={handleCreateModalToggle}
             >
               Create Group
-              <Icon icon="mdi:users-add-outline" width={24} />
+              <Icon icon='mdi:users-add-outline' width={24} />
             </Button>
           </aside>
         </header>
@@ -118,8 +130,8 @@ export default function Dashboard() {
         <section
           className={`w-full ${
             isTablet
-              ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
-              : "grid grid-cols-3 gap-6"
+              ? 'flex overflow-x-auto gap-4 scrollbar-hide pb-2'
+              : 'grid grid-cols-3 gap-6'
           }`}
         >
           {analytics.map((item, idx) => (
@@ -132,21 +144,21 @@ export default function Dashboard() {
           ))}
         </section>
 
-        <section className="w-full flex flex-col gap-4">
-          <header className="w-full flex items-center justify-between">
+        <section className='w-full flex flex-col gap-4'>
+          <header className='w-full flex items-center justify-between'>
             <h3>Your Groups</h3>
             <Button
-              variant="secondary"
-              size="lg"
-              className="bg-transparent shadow-none hover:bg-transparent dark:bg-transparent border-none text-light-red"
+              variant='secondary'
+              size='lg'
+              className='bg-transparent shadow-none hover:bg-transparent dark:bg-transparent border-none text-light-red'
               onClick={navigateToGroups}
             >
               View More
-              <Icon icon="ic:twotone-read-more" width={32} height={32} />
+              <Icon icon='ic:twotone-read-more' width={32} height={32} />
             </Button>
           </header>
 
-          <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4 lg:gap-0">
+          <section className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-4 lg:gap-0'>
             {groups.slice(0, 3).map((group) => {
               const { total, members, content } = getGroupExpensesInfo(
                 group.id
@@ -169,14 +181,14 @@ export default function Dashboard() {
           </section>
 
           {groups.length > 3 && (
-            <div className="w-full flex justify-center mt-4">
+            <div className='w-full flex justify-center mt-4'>
               <Button
-                variant="default"
-                className="bg-light-red rounded-full"
+                variant='default'
+                className='bg-light-red rounded-full'
                 onClick={navigateToGroups}
               >
                 See All Groups
-                <Icon icon="tabler:arrow-right" className="ml-1" width={16} />
+                <Icon icon='tabler:arrow-right' className='ml-1' width={16} />
               </Button>
             </div>
           )}
