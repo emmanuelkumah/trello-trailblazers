@@ -32,7 +32,7 @@ const login = async (req, res) => {
     // Return sanitized user data
     res.json({
       message: "Login successful",
-      user: sanitizeDoc(user),
+      user: { ...sanitizeDoc(user), token },
     });
   } catch (error) {
     console.error("Login error:", error); // Log for debugging
