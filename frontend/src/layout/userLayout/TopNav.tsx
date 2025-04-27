@@ -3,13 +3,15 @@ import { useTheme } from "@/providers/themeContext";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import TopnavActions from "./TopnavActions";
+import useAuthStore from "@/store/useAuthStore";
 
 
 export default function TopNav() {
+  const { user } = useAuthStore();
   const { theme, setTheme } = useTheme();
   const [actions, showActions] = useState<boolean>(false);
-  let full_name = "Franklin";
-  let email = "franklin@email.com";
+  let full_name = user?.fullName;
+  let email = user?.email;
 
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");

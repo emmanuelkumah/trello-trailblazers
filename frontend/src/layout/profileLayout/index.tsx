@@ -6,7 +6,7 @@ interface ProfileLayoutProps {
 }
 
 export default function ProfileLayout({ children }: ProfileLayoutProps) {
-  return (
+    return (
     <div className="w-full h-full">
       {children}
       <Outlet />

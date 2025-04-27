@@ -12,9 +12,11 @@ import ActionsModal from "@/ui/user/mobile/actionsModal";
 import { useDivvyGroupStore } from "@/store/GroupStore";
 import { useExpenseStore } from "@/store/ExpenseStore";
 import { ContentType } from "@/types";
+import useAuthStore from "@/store/useAuthStore";
 
 export default function Dashboard() {
-  let user = "Franklin";
+  const { user } = useAuthStore();
+  const user_name = user?.fullName;
   const navigate = useNavigate();
   const isTablet = useDeviceSize();
   const { data: groups } = useDivvyGroupStore();
@@ -86,7 +88,7 @@ export default function Dashboard() {
       <main className="w-full flex flex-col gap-6">
         <header className="w-full flex items-center justify-between">
           <aside>
-            <h1>Hello {user},</h1>
+            <h1>Hello {user_name},</h1>
             <p>Let's get you up to speed</p>
           </aside>
 
@@ -113,11 +115,10 @@ export default function Dashboard() {
         </header>
 
         <section
-          className={`w-full ${
-            isTablet
+          className={`w-full ${isTablet
               ? "flex overflow-x-auto gap-4 scrollbar-hide pb-2"
               : "grid grid-cols-3 gap-6"
-          }`}
+            }`}
         >
           {analytics.map((item, idx) => (
             <AnalyticsCard

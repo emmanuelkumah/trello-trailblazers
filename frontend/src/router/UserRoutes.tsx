@@ -10,15 +10,18 @@ import MobileProfile from "@/pages/user/profile/mobile/profile";
 import ProfileLayout from "@/layout/profileLayout";
 import AllGroups from "@/pages/user/all-groups/page";
 import GroupDisplay from "@/pages/user/groups/[slug]/page";
+import ProtectedRoute from "@/layout/protectedRoute";
 
 const UserRoutes = [
   {
     path: "/user",
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <UserLayout>
-          <Outlet />
-        </UserLayout>
+        <ProtectedRoute>
+          <UserLayout>
+            <Outlet />
+          </UserLayout>
+        </ProtectedRoute>
       </Suspense>
     ),
     children: [

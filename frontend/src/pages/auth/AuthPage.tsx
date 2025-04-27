@@ -9,11 +9,11 @@ import useAuthStore from "@/store/useAuthStore";
 
 const AuthPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("login");
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/user" replace />;
   }
 
   const handleTabChange = (value: string) => {
@@ -22,7 +22,7 @@ const AuthPage: React.FC = () => {
 
   return (
     <AuthLayout
-      title={activeTab === "login" ? "Hey Franklin," : "Divvy..."}
+      title={activeTab === "login" ? `Hey ${user?.fullName?.split(" ")[0]},` : "Divvy..."}
       subtitle={
         activeTab === "login"
           ? "Welcome back. Your next expense sharing is easier"
