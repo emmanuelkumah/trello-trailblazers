@@ -12,10 +12,11 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-const allowedOrigins = [
-  'http://localhost:5173', // Development
-  'https://trellodivvy.vercel.app', // Production
-];
+
+const allowedOrigins =
+  process.env.NODE_ENV === 'production'
+    ? ['https://trellodivvy.vercel.app'] // Production
+    : ['http://localhost:5173']; // Development
 
 app.use(
   cors({
