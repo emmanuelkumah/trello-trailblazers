@@ -14,6 +14,11 @@ router
     expenseController.getExpense
   )
   .post("/:groupId", authMiddleware, expenseController.createExpense)
+  .patch(
+    "/:groupId/expenses/:expenseId/settle",
+    authMiddleware,
+    expenseController.settleExpense
+  )
   .delete(
     "/:groupId/expenses/:expenseId",
     authMiddleware,

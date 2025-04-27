@@ -31,6 +31,7 @@ const ExpenseSchema = new mongoose.Schema({
         required: true,
       },
       amountOwed: { type: Number, default: 0 },
+      hasSettled: { type: Boolean, default: false },
     },
   ],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "ExpenseComment" }],

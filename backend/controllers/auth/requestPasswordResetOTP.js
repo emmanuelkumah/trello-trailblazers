@@ -39,7 +39,7 @@ const requestResetOTP = async (req, res) => {
           </span>
         </div>
         <p style="font-size: 14px; color: #888;">
-          This OTP is valid for 10 minutes. If you didn’t request this, you can safely ignore this email.
+          This OTP is valid for 10 minutes. If you didn't request this, you can safely ignore this email.
         </p>
         <p style="text-align: center; font-size: 14px; color: #aaa; margin-top: 30px;">
           — The Divvy Team
