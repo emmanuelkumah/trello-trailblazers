@@ -15,18 +15,13 @@ import { ContentType } from "@/types";
 import useAuthStore from "@/store/useAuthStore";
 
 export default function Dashboard() {
-  const { user } = useAuthStore();
-  const user_name = user?.fullName;
+  const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const isTablet = useDeviceSize();
   const { data: groups } = useDivvyGroupStore();
   const { getExpensesByGroupId } = useExpenseStore();
 
-  // Get authenticated user from the auth store
-  const { user, isAuthenticated } = useAuthStore();
-
-  // Extract user's first name for greeting
-  const userName = user?.fullName ? user.fullName.split(' ')[0] : 'there';
+  const user_name = user?.fullName;
 
   const [openModal, setModalOpen] = useState({
     create: false,
