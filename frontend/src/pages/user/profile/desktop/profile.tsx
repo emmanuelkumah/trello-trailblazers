@@ -81,7 +81,7 @@ export default function ProfileComponent() {
 
       // Update user profile via PATCH request
       const response = await axios.patch(
-        `http://localhost:5000/api/users/${user.id}`, // Ensure we use user.id
+        `https://trello-trailblazers-backend.onrender.com/api/users/${user.id}`,
         {
           fullName: profileData.fullName,
           email: profileData.email,
@@ -144,7 +144,7 @@ export default function ProfileComponent() {
       toast.info('Updating password...');
 
       // Make API call to update password
-      await axios.put(`http://localhost:5000/api/users/${user.id}/password`, {
+      await axios.put(`https://trello-trailblazers-backend.onrender.com/api/users/${user.id}/password`, {
         currentPassword,
         newPassword,
       });

@@ -39,7 +39,7 @@ const useAuthStore = create<AuthState>()(
         if (!email || !password) return;
         try {
           set({ isLoading: true, error: null });
-          const res = await axios.post("http://localhost:5000/api/auth/login", {
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/login", {
             email,
             password,
           });
@@ -70,7 +70,7 @@ const useAuthStore = create<AuthState>()(
           set({ isLoading: true, error: null });
 
           const res = await axios.post(
-            "http://localhost:5000/api/auth/register",
+            "https://trello-trailblazers-backend.onrender.com/api/auth/register",
             {
               fullname: userData.fullName,
               phone_number: userData.phoneNumber,
@@ -104,7 +104,7 @@ const useAuthStore = create<AuthState>()(
       logout: async () => {
         try {
           set({ isLoading: true, error: null });
-          await axios.post("http://localhost:5000/api/auth/logout");
+          await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/logout");
           set({ user: null, isAuthenticated: false, isLoading: false });
         } catch (error) {
           set({
@@ -120,7 +120,7 @@ const useAuthStore = create<AuthState>()(
         try {
           set({ isLoading: true, error: null });
           
-          const res = await axios.post("http://localhost:5000/api/auth/reset-password", {
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/reset-password", {
             email
           });
           
@@ -141,7 +141,7 @@ const useAuthStore = create<AuthState>()(
         try {
           set({ isLoading: true, error: null });
           
-          const res = await axios.post("http://localhost:5000/api/auth/verify-otp", {
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/verify-otp", {
             email,
             otp
           });
@@ -165,7 +165,7 @@ const useAuthStore = create<AuthState>()(
         try {
           set({ isLoading: true, error: null });
           
-          const res = await axios.post("http://localhost:5000/api/auth/set-password", {
+          const res = await axios.post("https://trello-trailblazers-backend.onrender.com/api/auth/set-password", {
             email,
             password
           });
