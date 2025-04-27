@@ -116,6 +116,7 @@ const useAuthStore = create<AuthState>()(
         try {
           set({ isLoading: true, error: null });
 
+
           const res = await axios.post(`${baseUrl}${AUTH_ENDPOINTS.REGISTER}`, {
             fullname: userData.fullName,
             phone_number: userData.phoneNumber,

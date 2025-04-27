@@ -5,13 +5,16 @@ import { useState } from "react";
 import TopnavActions from "./TopnavActions";
 import useAuthStore from "@/store/useAuthStore";
 
-
 export default function TopNav() {
   const { user } = useAuthStore();
   const { theme, setTheme } = useTheme();
   const [actions, showActions] = useState<boolean>(false);
-  let full_name = user?.fullName;
-  let email = user?.email;
+  // Get authenticated user details from the store
+  const { user } = useAuthStore();
+  
+  // Use user details if available, otherwise fallback to defaults
+  const full_name = user?.fullName || "Guest";
+  const email = user?.email || "Not signed in";
 
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -30,8 +33,6 @@ export default function TopNav() {
         <Icon role="button" icon={theme === "dark" ? "noto-v1:sun" : "logos:moon"} width={24} height={24} onClick={handleToggle} className="cursor-pointer" />
 
         <span
-          // role="button"
-          // aria-describedby="button"
           className="relative flex items-center gap-2 md:gap-4 cursor-pointer"
           onClick={handleActionsToggle}
         >
@@ -49,5 +50,5 @@ export default function TopNav() {
         setShow={handleActionsToggle}
       />
     </div>
-  )
+  );
 }
