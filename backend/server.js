@@ -12,12 +12,24 @@ connectDB();
 
 // Middleware
 app.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173", // Development
+  "https://trellodivvy.vercel.app", // Production
+];
+
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://trellodivvy.vercel.app'], // Add production URL here
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 app.use(cookieParser());
 
