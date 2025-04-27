@@ -29,7 +29,6 @@ import { useNavigate } from "react-router-dom";
 const RegisterForm: React.FC = () => {
   const {
     register: registerUser,
-    login: loginUser,
     isLoading,
     error,
     clearError,
