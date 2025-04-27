@@ -1,34 +1,37 @@
-import Actions from '@/components/actions';
-// import { useLogout } from "@/hooks/useLogout";
-import { useNavigate } from 'react-router-dom';
+import Actions from "@/components/actions";
+import logout from "@/lib/logout";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 type ActionTypes = {
   show: boolean;
   setShow: (show: boolean) => void;
-  // actionId: string;
 };
 
 export default function TopnavActions({ show, setShow }: ActionTypes) {
   const navigate = useNavigate();
-  // const { logout } = useLogout();
 
   const actions = [
-    {
-      id: 'profile-settings',
-      icon: 'grommet-icons:user-settings',
-      label: 'Profile Settings',
-    },
-    { id: 'logout', icon: 'solar:logout-3-broken', label: 'Log Out' },
+    { id: "profile-settings", icon: "grommet-icons:user-settings", label: "Profile Settings" },
+    { id: "logout", icon: "solar:logout-3-broken", label: "Log Out" },
   ];
 
-  const handleActionClick = (actionId: string) => {
+  const handleActionClick = async (actionId: string) => {
     switch (actionId) {
       case 'profile-settings':
         navigate('/user/profile');
         break;
-      case 'logout':
-        // logout();
-        navigate('/');
+      case "logout":
+        toast.loading("Logging out...");
+        const success = await logout();
+        
+        if (success) {
+          toast.success("Logged out successfully");
+        } else {
+          toast.error("Logout failed on server, but you've been logged out locally");
+        }
+        
+        navigate("/", { replace: true });
         break;
       default:
         break;
@@ -43,8 +46,6 @@ export default function TopnavActions({ show, setShow }: ActionTypes) {
         show={show}
         setShow={setShow}
         positionThreshold={500}
-        // isIconReverse
-        // buttonClass={actions}
       />
     </div>
   );

@@ -15,9 +15,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
+import { useCookies } from "react-cookie";
 
 const LoginForm: React.FC = () => {
   const { login, isLoading, error, clearError } = useAuthStore();
+  const [_, setCookie] = useCookies(["divvy_token"]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -27,22 +29,31 @@ const LoginForm: React.FC = () => {
     },
   });
 
-  const useLoginMutation = () => {
-    return useMutation({
-      mutationFn: ({ email, password }: { email: string; password: string }) =>
-        login(email, password),
-    });
-  };
-  const { mutateAsync: loginMutate } = useLoginMutation();
+  const { mutateAsync: loginMutate } = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      login(email, password),
+  });
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
       clearError();
-      const userData = await loginMutate({
+      const authResponse = await loginMutate({
         email: data.email,
         password: data.password,
       });
-      console.log("Logged in!", userData);
+
+      if (authResponse?.token) {
+        // Set the token cookie here
+        setCookie("divvy_token", authResponse.token, {
+          path: "/",
+          secure: true,
+          sameSite: "strict",
+          maxAge: 60 * 60 * 24 * 7, // 7 days
+        });
+        console.log("Token set:", authResponse.token);
+      }
+
+      console.log("Logged in!", authResponse);
     } catch (err) {
       console.error("Login failed:", err);
     }
@@ -51,6 +62,7 @@ const LoginForm: React.FC = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        {/* --- email field --- */}
         <FormField
           control={form.control}
           name="email"
@@ -61,8 +73,8 @@ const LoginForm: React.FC = () => {
                 <Input
                   placeholder="your@email.com"
                   type="email"
-                  className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300"
                   {...field}
+                  className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300"
                 />
               </FormControl>
               <FormMessage />
@@ -70,6 +82,7 @@ const LoginForm: React.FC = () => {
           )}
         />
 
+        {/* --- password field --- */}
         <FormField
           control={form.control}
           name="password"
@@ -80,8 +93,8 @@ const LoginForm: React.FC = () => {
                 <Input
                   placeholder="••••••••"
                   type="password"
-                  className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300"
                   {...field}
+                  className="border-none py-1 px-4 text-black outline-none focus:outline-none focus:border-none dark:text-gray-300"
                 />
               </FormControl>
               <FormMessage />

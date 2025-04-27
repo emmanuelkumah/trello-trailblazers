@@ -6,9 +6,9 @@ import TopnavActions from "./TopnavActions";
 import useAuthStore from "@/store/useAuthStore";
 
 export default function TopNav() {
+  const { user } = useAuthStore();
   const { theme, setTheme } = useTheme();
   const [actions, showActions] = useState<boolean>(false);
-  
   // Get authenticated user details from the store
   const { user } = useAuthStore();
   
