@@ -25,7 +25,7 @@ export default function EditProfileMobile() {
       setProfileData({
         fullName: user.fullName || '',
         email: user.email || '',
-        nationality: user.nationality || '',
+        nationality: user.country || '',
         stateRegion: user.stateRegion || '',
         phoneNumber: user.phoneNumber || '',
         profileImage: user.profileImage || '/animoji.svg',
