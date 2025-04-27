@@ -9,6 +9,7 @@ interface User {
   phoneNumber: string;
   country: string;
   stateRegion: string;
+  profileImage?: string;
 }
 
 interface AuthState {
